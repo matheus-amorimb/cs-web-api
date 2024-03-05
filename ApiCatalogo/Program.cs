@@ -12,12 +12,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+// string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+string mySqlConnection = "Server=localhost;Database=ApiCatalogDB;Uid=root;Pwd=148036;";
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
