@@ -10,13 +10,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
-
 // string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 string mySqlConnection = "Server=localhost;Database=ApiCatalogDB;Uid=root;Pwd=148036;";
 
-builder.Services.AddDbContext<AppDbContext>(options => 
-    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection));
+});
+
+var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
