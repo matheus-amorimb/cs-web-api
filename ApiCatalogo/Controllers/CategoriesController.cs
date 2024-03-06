@@ -47,5 +47,19 @@ namespace ApiCatalogo.Controllers
             return new CreatedAtRouteResult(nameof(GetCategory), 
                 new {id = category.CategoryId}, category); 
         }
+
+        [HttpPut("{id:int}")]
+        public ActionResult ModifyCategory(int id, Category category)
+        {
+            if (id != category.CategoryId)
+            {
+                return BadRequest();
+            }
+            _context.Categories.Entry(category);
+            _context.SaveChanges();
+
+            return Ok(category);
+        }
+        
     }
 }
