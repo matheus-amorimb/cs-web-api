@@ -1,7 +1,9 @@
 using ApiCatalogo.Context;
 using ApiCatalogo.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiCatalogo.Controllers
 {
@@ -55,10 +57,25 @@ namespace ApiCatalogo.Controllers
             {
                 return BadRequest();
             }
-            _context.Categories.Entry(category);
+            _context.Categories.Entry(category).State = EntityState.Modified;
             _context.SaveChanges();
 
             return Ok(category);
+        }
+
+        [HttpDelete("{id:int}")]
+        public ActionResult DeleteCategory(int id)
+        {
+            var categorie = _context.Categories.FirstOrDefault(item => item.CategoryId == id);
+
+            if (categorie is null)
+            {
+                return BadRequest();
+            }
+            _context.Categories.Remove(categorie);
+            _context.SaveChanges();
+
+            return Ok(categorie);
         }
         
     }
