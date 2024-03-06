@@ -17,6 +17,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
@@ -24,19 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="Controllers\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Controllers\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Controllers\**" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
