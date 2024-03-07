@@ -19,7 +19,7 @@ namespace ApiCatalogo.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetAllProducts()
         {
-            var products = _context.Products.ToList();
+            var products = _context.Products.AsNoTracking().ToList();
             if(products is null)
             {
                 return NotFound();
@@ -31,7 +31,7 @@ namespace ApiCatalogo.Controllers
         [HttpGet("{id:int}")]
         public ActionResult<Product> GetProduct(int id)
         {
-            var product = _context.Products.FirstOrDefault(item => item.ProductId == id);
+            var product = _context.Products.AsNoTracking().FirstOrDefault(item => item.ProductId == id);
             if(product is null)
             {
                 return NotFound();

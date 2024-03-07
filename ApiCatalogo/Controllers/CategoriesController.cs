@@ -21,21 +21,36 @@ namespace ApiCatalogo.Controllers
         [HttpGet]
         public ActionResult<ICollection<Category>> GetAllCategories()
         {
-            var categories = _context.Categories.ToList();
-            if (categories is null)
+            try
             {
-                return NotFound();
+                var categories = _context.Categories.AsNoTracking().ToList();
+                if (categories is null)
+                {
+                    return NotFound();
+                }
+                return categories;
+                // throw new DataMisalignedException();
             }
-            return categories;
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Ocorreu um erro ao tratar a sua solicitação.");
+            }
         }
 
+        [HttpGet("products")]
+        public ActionResult<IEnumerable<Category>> GetCategoriesProducts()
+        {
+            return _context.Categories.AsNoTracking().Include(item => item.Products).ToList();
+        }
+        
         [HttpGet("{id:int}", Name = nameof(GetCategory))]
         public ActionResult<Category> GetCategory(int id)
         {
-            var category = _context.Categories.FirstOrDefault(item => item.CategoryId == id);
+            var category = _context.Categories.AsNoTracking().FirstOrDefault(item => item.CategoryId == id);
             if (category is null)
             {
-                return NotFound();
+                return NotFound($"Categoria com id = {id} não encontrada...");
             }
             return category;
         }
