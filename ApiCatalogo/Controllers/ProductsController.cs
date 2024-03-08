@@ -26,11 +26,19 @@ namespace ApiCatalogo.Controllers
             }
 
             return products;
-        }      
-        
-        [HttpGet("{id:int}")]
-        public ActionResult<Product> GetProduct(int id)
+        }
+
+        [HttpGet("{valor:alpha:length(5)}")]
+        public ActionResult<Product> GetFirstProduct()
         {
+            return _context.Products.FirstOrDefault();
+        }
+        
+        [HttpGet("{id:int}/{param2}")]
+        public ActionResult<Product> GetProduct(int id, string param2)
+        {
+            Console.WriteLine(param2);
+            
             var product = _context.Products.AsNoTracking().FirstOrDefault(item => item.ProductId == id);
             if(product is null)
             {

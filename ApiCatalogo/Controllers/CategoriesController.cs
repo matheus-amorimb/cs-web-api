@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiCatalogo.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -44,7 +44,7 @@ namespace ApiCatalogo.Controllers
             return _context.Categories.AsNoTracking().Include(item => item.Products).ToList();
         }
         
-        [HttpGet("{id:int}", Name = nameof(GetCategory))]
+        [HttpGet("{id:int:min(1)}", Name = nameof(GetCategory))]
         public ActionResult<Category> GetCategory(int id)
         {
             var category = _context.Categories.AsNoTracking().FirstOrDefault(item => item.CategoryId == id);
