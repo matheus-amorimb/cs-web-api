@@ -1,6 +1,7 @@
 using ApiCatalogo.Context;
 using ApiCatalogo.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiCatalogo.Controllers
@@ -34,12 +35,13 @@ namespace ApiCatalogo.Controllers
             return _context.Products.FirstOrDefault();
         }
         
-        [HttpGet("{id:int}/{param2}")]
-        public ActionResult<Product> GetProduct(int id, string param2)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Product>> GetProduct(int id, [BindRequired] string name)
         {
-            Console.WriteLine(param2);
+
+            var productName = name;
             
-            var product = _context.Products.AsNoTracking().FirstOrDefault(item => item.ProductId == id);
+            var product = await _context.Products.AsNoTracking().FirstOrDefaultAsync(item => item.ProductId == id);
             if(product is null)
             {
                 return NotFound();
