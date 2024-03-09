@@ -36,11 +36,9 @@ namespace ApiCatalogo.Controllers
         }
         
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Product>> GetProduct(int id, [BindRequired] string name)
+        public async Task<ActionResult<Product>> GetProduct([FromQuery] int id)
         {
 
-            var productName = name;
-            
             var product = await _context.Products.AsNoTracking().FirstOrDefaultAsync(item => item.ProductId == id);
             if(product is null)
             {

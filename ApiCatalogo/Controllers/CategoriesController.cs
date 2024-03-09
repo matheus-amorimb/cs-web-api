@@ -1,5 +1,6 @@
 using ApiCatalogo.Context;
 using ApiCatalogo.Models;
+using ApiCatalogo.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,18 @@ namespace ApiCatalogo.Controllers
         {
             _context = context;
         }
+
+        [HttpGet("UsingFromServices/{name}")]
+        public ActionResult<string> GetGreetingFromServices([FromServices] IMyService myService, string name)
+        {
+            return myService.Greeting(name);
+        }
+        [HttpGet("NotUsingFromServices/{name}")]
+        public ActionResult<string> GetGreetingNotFromServices(IMyService myService, string name)
+        {
+            return myService.Greeting(name);
+        }
+        
         
         [HttpGet]
         public ActionResult<ICollection<Category>> GetAllCategories()
