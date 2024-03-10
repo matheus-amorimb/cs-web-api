@@ -28,7 +28,7 @@ namespace ApiCatalogo.Controllers
         public ActionResult<string> GetGreetingNotFromServices(IMyService myService, string name)
         {
             return myService.Greeting(name);
-        }
+        }   
         
         
         [HttpGet]

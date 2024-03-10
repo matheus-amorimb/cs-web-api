@@ -28,4 +28,20 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Validation\FirstLetterUppercaseAttribute\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Validation\FirstLetterUppercaseAttribute\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Validation\FirstLetterUppercaseAttribute\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Validation\FirstLetterUppercaseAttribute\**" />
+  </ItemGroup>
+
 </Project>
