@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ApiCatalogo.Controllers
 {
@@ -13,12 +14,35 @@ namespace ApiCatalogo.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IConfiguration _configuration;
         
-        public CategoriesController(AppDbContext context)
+        public CategoriesController(AppDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
+        [HttpGet("ReadSettingsFile")]
+        public string GetConfigSettings()
+        {
+            var key1 = _configuration["key1"];
+            var key2 = _configuration["key2"];
+            var sectionTestKey1 = _configuration["sectionTest:key1"];
+            var sectionTestKey2 = _configuration["sectionTest:key2"];
+            
+            var data = new
+            {
+                key1 = key1,
+                key2 = key2,
+                sectionTestKey1 = sectionTestKey1,
+                sectionTestKey2 = sectionTestKey2
+            };
+            
+            string jsonResult = JsonConvert.SerializeObject(data);
+
+            return jsonResult;
+        }
+        
         [HttpGet("UsingFromServices/{name}")]
         public ActionResult<string> GetGreetingFromServices([FromServices] IMyService myService, string name)
         {
