@@ -25,16 +25,22 @@ builder.Services.AddTransient<IMyService, MyService>();
 
 var app = builder.Build();
 
+//Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.Use(async (context, next) =>
+{
+    await next(context);
+});
 
+app.MapControllers();
 app.Run();
