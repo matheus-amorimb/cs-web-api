@@ -1,4 +1,5 @@
 using ApiCatalogo.Context;
+using ApiCatalogo.Filters;
 using ApiCatalogo.Models;
 using ApiCatalogo.Services;
 using Microsoft.AspNetCore.Http;
@@ -48,14 +49,15 @@ namespace ApiCatalogo.Controllers
         {
             return myService.Greeting(name);
         }
+        
         [HttpGet("NotUsingFromServices/{name}")]
         public ActionResult<string> GetGreetingNotFromServices(IMyService myService, string name)
         {
             return myService.Greeting(name);
         }   
         
-        
         [HttpGet]
+        [ServiceFilter(typeof(ApiLoggingFilter))]
         public ActionResult<ICollection<Category>> GetAllCategories()
         {
             try
