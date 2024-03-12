@@ -2,10 +2,10 @@ using ApiCatalogo.Context;
 using ApiCatalogo.Filters;
 using ApiCatalogo.Models;
 using ApiCatalogo.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace ApiCatalogo.Controllers
@@ -16,11 +16,12 @@ namespace ApiCatalogo.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
-        
-        public CategoriesController(AppDbContext context, IConfiguration configuration)
+        private readonly ILogger _logger;
+        public CategoriesController(AppDbContext context, IConfiguration configuration, ILogger<CategoriesController> logger)
         {
             _context = context;
             _configuration = configuration;
+            _logger = logger;
         }
 
         [HttpGet("ReadSettingsFile")]
@@ -80,6 +81,7 @@ namespace ApiCatalogo.Controllers
         [HttpGet("products")]
         public ActionResult<IEnumerable<Category>> GetCategoriesProducts()
         {
+            _logger.LogInformation("=============== GET api/Categories/products ===============");
             return _context.Categories.AsNoTracking().Include(item => item.Products).ToList();
         }
         
