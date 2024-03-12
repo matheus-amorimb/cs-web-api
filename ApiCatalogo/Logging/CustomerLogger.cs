@@ -19,9 +19,9 @@ public class CustomerLogger : ILogger
         return logLevel == loggerConfig.LogLevel;
     }
 
-    public IDisposable BeginScope<TState>(TState state)
-    {
-        return null;
-    }
+    // public IDisposable BeginScope<TState>(TState state)
+    // {
+    //     return null;
+    // }
     
 }
