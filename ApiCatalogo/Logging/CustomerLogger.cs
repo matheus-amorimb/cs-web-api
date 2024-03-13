@@ -32,7 +32,7 @@ public class CustomerLogger : ILogger
 
     private void WriteTextInFile(string message)
     {
-        string pathLogFile = @"/home/matheus/matheus-dev/code/cs/cs-studies/ApiCatalogo/ApiCatalogo/Data/log";
+        string pathLogFile = @"/home/matheus/matheus-dev/code/cs/cs-studies/ApiCatalogo/ApiCatalogo/Data/log/ApiCatalogo_log.txt";
 
         using (StreamWriter streamWriter = new StreamWriter(pathLogFile, true))
         {

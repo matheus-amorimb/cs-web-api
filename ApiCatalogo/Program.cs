@@ -1,18 +1,19 @@
 using System.Text.Json.Serialization;
 using ApiCatalogo.Context;
 using ApiCatalogo.Filters;
+using ApiCatalogo.Logging;
 using ApiCatalogo.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers()
-    .AddJsonOptions(options => {
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;    
-    });
+    .AddJsonOptions(options => { options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+
 builder.Services.AddSwaggerGen();
 
 // Add services to the container.
@@ -26,6 +27,12 @@ builder.Services.AddScoped<ApiLoggingFilter>();
 
 builder.Services.AddTransient<IMyService, MyService>();
 
+builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
+    {
+        LogLevel = LogLevel.Information
+    }
+));
+
 var app = builder.Build();
 
 //Configure the HTTP request pipeline
@@ -37,13 +44,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.Use(async (context, next) =>
-{
-    await next(context);
-});
+app.Use(async (context, next) => { await next(context); });
 
 app.MapControllers();
+
 app.Run();
