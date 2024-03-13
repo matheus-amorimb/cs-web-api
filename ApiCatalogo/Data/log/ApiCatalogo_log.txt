@@ -17,3 +17,10 @@ SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Pr
 FROM `Products` AS `p`
 WHERE `p`.`ProductId` = @__id_0
 LIMIT 1
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/cs-studies/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Error: 0 - An unhandled exception occurred
