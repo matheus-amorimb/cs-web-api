@@ -23,5 +23,4 @@ public class CustomLoggerProvider : ILoggerProvider
     {
         loggers.Clear();
     }
-    
 }

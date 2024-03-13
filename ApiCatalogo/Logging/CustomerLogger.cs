@@ -4,9 +4,8 @@ namespace ApiCatalogo.Logging;
 
 public class CustomerLogger : ILogger
 {
-    readonly string loggerName;
-
     private readonly CustomLoggerProviderConfiguration loggerConfig;
+    readonly string loggerName;
 
     public CustomerLogger(string name, CustomLoggerProviderConfiguration config)
     {
@@ -23,5 +22,30 @@ public class CustomerLogger : ILogger
     {
         return null;
     }
-    
+
+    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState,
+        Exception, string> formatter)
+    {
+        string message = $"{logLevel.ToString()}: {eventId.Id} - {formatter(state, exception)}";
+        WriteTextInFile(message);
+    }
+
+    private void WriteTextInFile(string message)
+    {
+        string pathLogFile = @"/home/matheus/matheus-dev/code/cs/cs-studies/ApiCatalogo/ApiCatalogo/Data/log";
+
+        using (StreamWriter streamWriter = new StreamWriter(pathLogFile, true))
+        {
+            try
+            {
+                streamWriter.WriteLine(message);
+                streamWriter.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+    }
 }
