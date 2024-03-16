@@ -49,6 +49,43 @@ namespace ApiCatalogo.Controllers
             
             return Ok(category);
         }
+
+        [HttpPut("{id:int}")]
+        public ActionResult Put(int id, Category category)
+        {
+            if (id != category.CategoryId)
+            {
+                _logger.LogWarning("Data invalid");
+                return BadRequest("Data invalid");
+            }
+
+            _repositoy.Update(category);
+            
+            return Ok(category);
+        }
+        
+        [HttpDelete("{id:int}")]
+        public ActionResult Delete(int id)
+        {
+            var category = _repositoy.GetCategory(id);
+            
+            if (id != category.CategoryId)
+            {
+                _logger.LogWarning("Data invalid");
+                return BadRequest("Data invalid");
+            }
+
+            _repositoy.Update(category);
+            
+            return Ok(category);
+        }
+        
+        
+        
+        
+        
+        
+        
         
         //###################################################################################
         //############################## USING DEFAULT PATTERN ##############################
