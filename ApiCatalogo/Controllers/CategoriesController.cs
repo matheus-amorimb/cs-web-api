@@ -15,10 +15,10 @@ namespace ApiCatalogo.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ICategorieRepository _repositoy;
+        private readonly ICategoryRepository _repositoy;
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
-        public CategoriesController(ICategorieRepository repository, IConfiguration configuration, ILogger<CategoriesController> logger)
+        public CategoriesController(ICategoryRepository repository, IConfiguration configuration, ILogger<CategoriesController> logger)
         {
             _repositoy = repository;
             _configuration = configuration;

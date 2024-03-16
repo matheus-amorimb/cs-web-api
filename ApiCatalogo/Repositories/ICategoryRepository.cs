@@ -2,7 +2,7 @@ using ApiCatalogo.Models;
 
 namespace ApiCatalogo.Repositories;
 
-public interface ICategorieRepository
+public interface ICategoryRepository
 {
     IEnumerable<Category> GetCategories();
     Category GetCategory(int id);

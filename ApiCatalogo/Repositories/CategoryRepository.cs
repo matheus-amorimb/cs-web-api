@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiCatalogo.Repositories;
 
-public class CategoryRepository : ICategorieRepository
+public class CategoryRepository : ICategoryRepository
 {
     private readonly AppDbContext _context;
 
