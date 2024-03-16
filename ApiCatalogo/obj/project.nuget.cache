@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Atu1NJXF4BCdjvidJlwSge7ymlmWajzfd/A2B5FigbkQ1NNv8AgPIrnppQRHqZA/ZqHOigKmNBkzroh16oPfwg==",
+  "dgSpecHash": "joZ6BEtyxVFtbKdJCo1iqQV0BY4fH0pzpfmt6AZRhbiNyPi7scufIOSnaqFGmqztrIqjPYzhH2QxmfIpspHnyg==",
   "success": true,
-  "projectFilePath": "/home/matheus/matheus-dev/code/cs/cs-studies/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj",
+  "projectFilePath": "/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj",
   "expectedPackageFiles": [
     "/home/matheus/.nuget/packages/bouncycastle.cryptography/2.2.1/bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "/home/matheus/.nuget/packages/google.protobuf/3.25.1/google.protobuf.3.25.1.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/matheus/matheus-dev/code/cs/cs-studies/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj": {}
+    "/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj": {}
   },
   "projects": {
-    "/home/matheus/matheus-dev/code/cs/cs-studies/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj": {
+    "/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/matheus/matheus-dev/code/cs/cs-studies/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj",
+        "projectUniqueName": "/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj",
         "projectName": "ApiCatalogo",
-        "projectPath": "/home/matheus/matheus-dev/code/cs/cs-studies/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj",
+        "projectPath": "/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj",
         "packagesPath": "/home/matheus/.nuget/packages/",
-        "outputPath": "/home/matheus/matheus-dev/code/cs/cs-studies/ApiCatalogo/ApiCatalogo/obj/",
+        "outputPath": "/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/matheus/.nuget/NuGet/NuGet.Config"
