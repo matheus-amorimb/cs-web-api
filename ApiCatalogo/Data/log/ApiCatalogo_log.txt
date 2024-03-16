@@ -41,3 +41,113 @@ Information: 20101 - Executed DbCommand (60ms) [Parameters=[], CommandType='Text
 SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
 FROM `Categories` AS `c`
 Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (55ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (40ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+WHERE `c`.`CategoryId` = @__p_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+WHERE `c`.`CategoryId` = @__p_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+WHERE `c`.`CategoryId` = @__p_0
+LIMIT 1
+Warning: 0 - Category with id = 10 not found...
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Error: 1 - An unhandled exception has occurred while executing the request.
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (61ms) [Parameters=[@p0='?' (Size = 80), @p1='?' (Size = 300)], CommandType='Text', CommandTimeout='30']
+INSERT INTO `Categories` (`Name`, `UrlImage`)
+VALUES (@p0, @p1);
+SELECT `CategoryId`
+FROM `Categories`
+WHERE ROW_COUNT() = 1 AND `CategoryId` = LAST_INSERT_ID();
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+WHERE `c`.`CategoryId` = @__p_0
+LIMIT 1
+Warning: 0 - Data invalid
+Warning: 0 - Data invalid
+Warning: 0 - Data invalid
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (105ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?' (Size = 80), @p1='?' (Size = 300)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+UPDATE `Categories` SET `Name` = @p0, `UrlImage` = @p1
+WHERE `CategoryId` = @p2;
+SELECT ROW_COUNT();
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+WHERE `c`.`CategoryId` = @__p_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?' (Size = 80), @p1='?' (Size = 300)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+UPDATE `Categories` SET `Name` = @p0, `UrlImage` = @p1
+WHERE `CategoryId` = @p2;
+SELECT ROW_COUNT();
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (101ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+WHERE `c`.`CategoryId` = @__p_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+DELETE FROM `Categories`
+WHERE `CategoryId` = @p0;
+SELECT ROW_COUNT();
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`

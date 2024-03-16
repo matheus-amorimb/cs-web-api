@@ -16,79 +16,86 @@ namespace ApiCatalogo.Controllers
         {
             _context = context;
         }
-        
-        [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetAllProducts()
-        {
-            var products = _context.Products.AsNoTracking().ToList();
-            if(products is null)
-            {
-                return NotFound();
-            }
-
-            return products;
-        }
-
-        [HttpGet("{valor:alpha:length(5)}")]
-        public ActionResult<Product> GetFirstProduct()
-        {
-            return _context.Products.FirstOrDefault();
-        }
-        
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<Product>> GetProduct([FromQuery] int id)
-        {
-
-            var product = await _context.Products.AsNoTracking().FirstOrDefaultAsync(item => item.ProductId == id);
-            if(product is null)
-            {
-                return NotFound();
-            }
-
-            return product;
-        }
-
-        [HttpPost]
-        public ActionResult InsertProduct(Product product)
-        {
-            _context.Products.Add(product);
-            _context.SaveChanges(); //Persiste os dados na tabela
-            
-            return new CreatedAtRouteResult(nameof(GetProduct), 
-                new {id = product.ProductId}, product);
-        }
-        
-        [HttpPut("{id:int}")]  
-        public ActionResult ModifyProduct(int id, Product product)  
-        {  
-            if(id != product.ProductId)
-            {
-                return BadRequest();
-            }
-	
-            _context.Entry(product).State = EntityState.Modified;  
-            _context.SaveChanges(); 
+    //##################################################################################
+    //############################ USING REPOSITORY PATTERN ############################
+    //##################################################################################
     
-            return Ok(product);
-        }        
-        
-        [HttpDelete("{id:int}")]  
-        public ActionResult DeleteProduct(int id)  
-        {  
-            
-            var product = _context.Products.FirstOrDefault(item => item.ProductId == id);
-
-            if (product is null)
-            {
-                return NotFound("Product not located");
-            }
-
-            _context.Products.Remove(product);
-            _context.SaveChanges();
-            
-            return Ok(product);
-        }
-        
-        
+    //###################################################################################
+    //############################## USING DEFAULT PATTERN ##############################
+    //###################################################################################
+    //     
+    //     [HttpGet]
+    //     public ActionResult<IEnumerable<Product>> GetAllProducts()
+    //     {
+    //         var products = _context.Products.AsNoTracking().ToList();
+    //         if(products is null)
+    //         {
+    //             return NotFound();
+    //         }
+    //
+    //         return products;
+    //     }
+    //
+    //     [HttpGet("{valor:alpha:length(5)}")]
+    //     public ActionResult<Product> GetFirstProduct()
+    //     {
+    //         return _context.Products.FirstOrDefault();
+    //     }
+    //     
+    //     [HttpGet("{id:int}")]
+    //     public async Task<ActionResult<Product>> GetProduct([FromQuery] int id)
+    //     {
+    //
+    //         var product = await _context.Products.AsNoTracking().FirstOrDefaultAsync(item => item.ProductId == id);
+    //         if(product is null)
+    //         {
+    //             return NotFound();
+    //         }
+    //
+    //         return product;
+    //     }
+    //
+    //     [HttpPost]
+    //     public ActionResult InsertProduct(Product product)
+    //     {
+    //         _context.Products.Add(product);
+    //         _context.SaveChanges(); //Persiste os dados na tabela
+    //         
+    //         return new CreatedAtRouteResult(nameof(GetProduct), 
+    //             new {id = product.ProductId}, product);
+    //     }
+    //     
+    //     [HttpPut("{id:int}")]  
+    //     public ActionResult ModifyProduct(int id, Product product)  
+    //     {  
+    //         if(id != product.ProductId)
+    //         {
+    //             return BadRequest();
+    //         }
+	   //
+    //         _context.Entry(product).State = EntityState.Modified;  
+    //         _context.SaveChanges(); 
+    //
+    //         return Ok(product);
+    //     }        
+    //     
+    //     [HttpDelete("{id:int}")]  
+    //     public ActionResult DeleteProduct(int id)  
+    //     {  
+    //         
+    //         var product = _context.Products.FirstOrDefault(item => item.ProductId == id);
+    //
+    //         if (product is null)
+    //         {
+    //             return NotFound("Product not located");
+    //         }
+    //
+    //         _context.Products.Remove(product);
+    //         _context.SaveChanges();
+    //         
+    //         return Ok(product);
+    //     }
+    //     
+    //     
     }
 }
