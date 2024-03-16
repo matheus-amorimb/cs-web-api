@@ -35,7 +35,20 @@ namespace ApiCatalogo.Controllers
             var categories = _repositoy.GetCategories().ToList();
             return Ok(categories);
         }
-        
+
+        [HttpGet("{id:int}")]
+        public ActionResult<Category> GetCategory(int id)
+        {
+            var category = _repositoy.GetCategory(id);
+
+            if (category is null)
+            {
+                _logger.LogWarning($"Category with id = {id} not found...");
+                return BadRequest($"Category with id = {id} not found...");
+            }
+            
+            return Ok(category);
+        }
         
         //###################################################################################
         //############################## USING DEFAULT PATTERN ##############################
