@@ -31,6 +31,7 @@ public class Product : IValidatableObject
     
     public float Stock { get; set; }
     public DateTime RegisterDate { get; set; }
+    
     public int CategoryId { get; set; }
     
     [JsonIgnore]

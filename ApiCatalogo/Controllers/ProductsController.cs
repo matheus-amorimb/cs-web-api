@@ -1,5 +1,6 @@
 using ApiCatalogo.Context;
 using ApiCatalogo.Models;
+using ApiCatalogo.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -8,17 +9,73 @@ namespace ApiCatalogo.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController(IProductRepository repository) : ControllerBase
     {
-        private readonly AppDbContext _context;
-
-        public ProductsController(AppDbContext context)
-        {
-            _context = context;
-        }
+        private readonly IProductRepository _repository = repository;
     //##################################################################################
     //############################ USING REPOSITORY PATTERN ############################
     //##################################################################################
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Product>> GetAllProducts()
+        {
+            var products = _repository.GetProducts().ToList();
+            if (products is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(products);
+        }
+
+        [HttpGet("{id:int}", Name = "GetProduct")]
+        public ActionResult<Product> GetProduct(int id)
+        {
+            var product = _repository.GetProduct(id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
+        }
+
+        [HttpPost]
+        public ActionResult<Product> PostProduct(Product product)
+        {
+            if (product is null)
+            {
+                return BadRequest();
+            }
+
+            var newProduct = _repository.Create(product);
+
+            return new CreatedAtRouteResult("GetProduct",
+                new { id = newProduct.ProductId }, newProduct);
+        }
+
+        [HttpPut("{id:int}")]
+        public ActionResult<Product> UpdateProduct(int id, Product product)
+        {
+            if (id != product.ProductId)
+            {
+                return BadRequest();
+            }
+
+            var isUpdated = _repository.Update(product);
+
+            return isUpdated ? Ok(product) : StatusCode(500, $"Fail to update the product of id = {id}");
+
+        }
+
+        [HttpDelete("{id:int}")]
+        public ActionResult<bool> DeleteProduct(int id)
+        {
+            var isDeleted = _repository.Delete(id);
+            return isDeleted ? Ok($"Product of id = {id} is deleted") : StatusCode(500, $"Fail to delete the product of id = {id}");
+        }
+}
     
     //###################################################################################
     //############################## USING DEFAULT PATTERN ##############################
@@ -72,7 +129,7 @@ namespace ApiCatalogo.Controllers
     //         {
     //             return BadRequest();
     //         }
-	   //
+    //
     //         _context.Entry(product).State = EntityState.Modified;  
     //         _context.SaveChanges(); 
     //
@@ -96,6 +153,6 @@ namespace ApiCatalogo.Controllers
     //         return Ok(product);
     //     }
     //     
-    //     
-    }
+    //}     
+    
 }
