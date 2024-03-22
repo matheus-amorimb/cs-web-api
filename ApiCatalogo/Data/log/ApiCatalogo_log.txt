@@ -217,3 +217,56 @@ WHERE ROW_COUNT() = 1 AND `ProductId` = LAST_INSERT_ID();
 Information: 20101 - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
 FROM `Products` AS `p`
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (68ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 20101 - Executed DbCommand (54ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+WHERE `p`.`ProductId` = @__p_0
+LIMIT 1
+Error: 0 - An unhandled exception occurred
+Information: 20101 - Executed DbCommand (9ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+WHERE `p`.`ProductId` = @__p_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (22ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+DELETE FROM `Products`
+WHERE `ProductId` = @p0;
+SELECT ROW_COUNT();
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+WHERE `p`.`ProductId` = @__p_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+DELETE FROM `Products`
+WHERE `ProductId` = @p0;
+SELECT ROW_COUNT();
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+WHERE `p`.`ProductId` = @__p_0
+LIMIT 1
+Information: 0 - Application is shutting down...
