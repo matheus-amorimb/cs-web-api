@@ -2,11 +2,22 @@ using ApiCatalogo.Models;
 
 namespace ApiCatalogo.Repositories;
 
-public interface IProductRepository
+//================================================
+//GENERIC REPOSITORY
+//================================================
+public interface IProductRepository : IRepository<Product>
 {
-    IQueryable<Product> GetProducts();
-    Product GetProduct(int id);
-    Product Create(Product product);
-    bool Update(Product product);
-    bool Delete(int id);
+    IEnumerable<Product> GetProductsByCategory(int id);
 }
+
+//================================================
+//SPECIFIC REPOSITORY
+//================================================
+// public interface IProductRepository
+// {
+//     IQueryable<Product> GetProducts();
+//     Product GetProduct(int id);
+//     Product Create(Product product);
+//     bool Update(Product product);
+//     bool Delete(int id);
+// }
