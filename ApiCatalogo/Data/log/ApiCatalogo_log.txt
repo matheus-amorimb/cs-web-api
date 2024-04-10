@@ -330,3 +330,4 @@ Warning: 3 - Failed to determine the https port for redirect.
 Information: 20101 - Executed DbCommand (69ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
 FROM `Products` AS `p`
+Information: 0 - Application is shutting down...

@@ -19,14 +19,16 @@ namespace ApiCatalogo.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly IRepository<Category> _repository;
+        // private readonly IRepository<Category> _repository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _configuration;
         private readonly ILogger<CategoriesController> _logger;
 
-        public CategoriesController(IRepository<Category> repository, IConfiguration configuration,
+        public CategoriesController(IUnitOfWork unitOfWork, IConfiguration configuration,
             ILogger<CategoriesController> logger)
         {
-            _repository = repository;
+            // _repository = repository;
+            _unitOfWork = unitOfWork;
             _configuration = configuration;
             _logger = logger;
         }
@@ -34,14 +36,14 @@ namespace ApiCatalogo.Controllers
          [HttpGet]
          public ActionResult<IEnumerable<Category>> GetAllCategories()
          {
-             var categories = _repository.GetAll().ToList();
+             var categories = _unitOfWork.CategoryRepository.GetAll().ToList();
              return Ok(categories);
          }
          
          [HttpGet("{id:int}")]
          public ActionResult<Category> GetCategory(int id)
          {
-             var category = _repository.GetById(p => p.CategoryId == id);
+             var category = _unitOfWork.CategoryRepository.GetById(p => p.CategoryId == id);
 
              if (category is null)
              {
@@ -55,7 +57,9 @@ namespace ApiCatalogo.Controllers
          [HttpPost]
          public ActionResult<Category> PostCategory(Category category)
          {
-             _repository.Create(category);
+             _unitOfWork.CategoryRepository.Create(category);
+             
+             _unitOfWork.Commit();
 
              return Ok(category);
          }
@@ -69,7 +73,8 @@ namespace ApiCatalogo.Controllers
                  return BadRequest("Data invalid");
              }
 
-             _repository.Update(category);
+             _unitOfWork.CategoryRepository.Update(category);
+             _unitOfWork.Commit();
 
              return Ok(category);
          }
@@ -77,9 +82,11 @@ namespace ApiCatalogo.Controllers
          [HttpDelete("{id:int}")]
          public ActionResult Delete(int id)
          {
-             var category = _repository.GetById(p => p.CategoryId == id);
+             var category = _unitOfWork.CategoryRepository.GetById(p => p.CategoryId == id);
 
-             _repository.Delete(category);
+             _unitOfWork.CategoryRepository.Delete(category);
+             
+             _unitOfWork.Commit();
 
              return Ok(category);
          }

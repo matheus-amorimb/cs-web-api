@@ -12,17 +12,18 @@ namespace ApiCatalogo.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository _repository;
-
-        public ProductsController(IProductRepository repository)
+        // private readonly IProductRepository _unitOfWork.ProductRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        public ProductsController(IUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            // _unitOfWork.ProductRepository = repository;
+            _unitOfWork = unitOfWork;
         }
         
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetAllProducts()
         {
-            var products = _repository.GetAll().ToList();
+            var products = _unitOfWork.ProductRepository.GetAll().ToList();
             if (products is null)
             {
                 return NotFound();
@@ -34,7 +35,7 @@ namespace ApiCatalogo.Controllers
         [HttpGet("{id:int}", Name = "GetProduct")]
         public ActionResult<Product> GetProduct(int id)
         {
-            var product = _repository.GetById(p => p.ProductId == id);
+            var product = _unitOfWork.ProductRepository.GetById(p => p.ProductId == id);
 
             if (product is null)
             {
@@ -47,11 +48,11 @@ namespace ApiCatalogo.Controllers
         [HttpGet("Category/{id:int}")]
         public ActionResult<IEnumerable<Product>> GetProductsByCategory(int id)
         {
-            var products = _repository.GetProductsByCategory(id).ToList();
+            var products = _unitOfWork.ProductRepository.GetProductsByCategory(id).ToList();
             
             if (products is null)
             {
-                return NotFound();
+                return NotFound(); 
             }
 
             return Ok(products);
@@ -66,7 +67,8 @@ namespace ApiCatalogo.Controllers
                 return BadRequest();
             }
 
-            var newProduct = _repository.Create(product);
+            var newProduct = _unitOfWork.ProductRepository.Create(product);
+            _unitOfWork.Commit();
 
             return new CreatedAtRouteResult("GetProduct",
                 new { id = newProduct.ProductId }, newProduct);
@@ -80,8 +82,10 @@ namespace ApiCatalogo.Controllers
                 return BadRequest();
             }
 
-            var isUpdated = _repository.Update(product);
+            var isUpdated = _unitOfWork.ProductRepository.Update(product);
 
+            _unitOfWork.Commit();
+            
             return isUpdated is not null ? Ok(product) : StatusCode(500, $"Fail to update the product of id = {id}");
 
         }
@@ -89,8 +93,10 @@ namespace ApiCatalogo.Controllers
         [HttpDelete("{id:int}")]
         public ActionResult<bool> DeleteProduct(int id)
         {
-            var product = _repository.GetById(p => p.ProductId == id);
-            var isDeleted = _repository.Delete(product);
+            var product = _unitOfWork.ProductRepository.GetById(p => p.ProductId == id);
+            var isDeleted = _unitOfWork.ProductRepository.Delete(product);
+            _unitOfWork.Commit();
+            
             return isDeleted is not null ? Ok($"Product of id = {id} is deleted") : StatusCode(500, $"Fail to delete the product of id = {id}");
         }
     }
@@ -101,7 +107,7 @@ namespace ApiCatalogo.Controllers
 [ApiController]
 public class ProductsController(IProductRepository repository) : ControllerBase
 {
-    private readonly IProductRepository _repository = repository;
+    private readonly IProductRepository _unitOfWork.ProductRepository = repository;
     
 //##################################################################################
 //############################ USING REPOSITORY PATTERN ############################
@@ -110,7 +116,7 @@ public class ProductsController(IProductRepository repository) : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Product>> GetAllProducts()
     {
-        var products = _repository.GetProducts().ToList();
+        var products = _unitOfWork.ProductRepository.GetProducts().ToList();
         if (products is null)
         {
             return NotFound();
@@ -122,7 +128,7 @@ public class ProductsController(IProductRepository repository) : ControllerBase
     [HttpGet("{id:int}", Name = "GetProduct")]
     public ActionResult<Product> GetProduct(int id)
     {
-        var product = _repository.GetProduct(id);
+        var product = _unitOfWork.ProductRepository.GetProduct(id);
 
         if (product is null)
         {
@@ -140,7 +146,7 @@ public class ProductsController(IProductRepository repository) : ControllerBase
             return BadRequest();
         }
 
-        var newProduct = _repository.Create(product);
+        var newProduct = _unitOfWork.ProductRepository.Create(product);
 
         return new CreatedAtRouteResult("GetProduct",
             new { id = newProduct.ProductId }, newProduct);
@@ -154,7 +160,7 @@ public class ProductsController(IProductRepository repository) : ControllerBase
             return BadRequest();
         }
 
-        var isUpdated = _repository.Update(product);
+        var isUpdated = _unitOfWork.ProductRepository.Update(product);
 
         return isUpdated ? Ok(product) : StatusCode(500, $"Fail to update the product of id = {id}");
 
@@ -163,7 +169,7 @@ public class ProductsController(IProductRepository repository) : ControllerBase
     [HttpDelete("{id:int}")]
     public ActionResult<bool> DeleteProduct(int id)
     {
-        var isDeleted = _repository.Delete(id);
+        var isDeleted = _unitOfWork.ProductRepository.Delete(id);
         return isDeleted ? Ok($"Product of id = {id} is deleted") : StatusCode(500, $"Fail to delete the product of id = {id}");
     }
 }

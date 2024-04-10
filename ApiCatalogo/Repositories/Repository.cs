@@ -26,7 +26,7 @@ public class Repository<T> : IRepository<T> where T : class
     public T Create(T entity)
     {
         Context.Set<T>().Add(entity);
-        Context.SaveChanges();
+        // Context.SaveChanges();
         return entity;
 
     }
@@ -34,7 +34,7 @@ public class Repository<T> : IRepository<T> where T : class
     public T Update(T entity)
     {
         Context.Set<T>().Update(entity);
-        Context.SaveChanges();
+        // Context.SaveChanges();
         return entity;
         
         // Context.Entry(entity).State = EntityState.Modified;
@@ -45,7 +45,7 @@ public class Repository<T> : IRepository<T> where T : class
     public T Delete(T entity)
     {
         Context.Set<T>().Remove(entity);
-        Context.SaveChanges();
+        // Context.SaveChanges();
         return entity;
     }
 }
