@@ -12,9 +12,9 @@ namespace ApiCatalogo.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IRepository<Product> _repository;
+        private readonly IProductRepository _repository;
 
-        public ProductsController(IRepository<Product> repository)
+        public ProductsController(IProductRepository repository)
         {
             _repository = repository;
         }
@@ -42,6 +42,20 @@ namespace ApiCatalogo.Controllers
             }
 
             return Ok(product);
+        }
+
+        [HttpGet("Category/{id:int}")]
+        public ActionResult<IEnumerable<Product>> GetProductsByCategory(int id)
+        {
+            var products = _repository.GetProductsByCategory(id).ToList();
+            
+            if (products is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(products);
+            
         }
         
         [HttpPost]
