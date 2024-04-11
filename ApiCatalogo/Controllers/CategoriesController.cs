@@ -1,4 +1,6 @@
 using ApiCatalogo.Context;
+using ApiCatalogo.DTOs;
+using ApiCatalogo.DTOs.Mappings;
 using ApiCatalogo.Filters;
 using ApiCatalogo.Models;
 using ApiCatalogo.Repositories;
@@ -34,14 +36,15 @@ namespace ApiCatalogo.Controllers
         }
         
          [HttpGet]
-         public ActionResult<IEnumerable<Category>> GetAllCategories()
+         public ActionResult<IEnumerable<CategoryDTO>> GetAllCategories()
          {
              var categories = _unitOfWork.CategoryRepository.GetAll().ToList();
-             return Ok(categories);
+             var categoriesDTO = categories.ToCategoryDtOs();
+             return Ok(categoriesDTO);
          }
          
          [HttpGet("{id:int}")]
-         public ActionResult<Category> GetCategory(int id)
+         public ActionResult<CategoryDTO> GetCategory(int id)
          {
              var category = _unitOfWork.CategoryRepository.GetById(p => p.CategoryId == id);
 
@@ -51,17 +54,21 @@ namespace ApiCatalogo.Controllers
                  return BadRequest($"Category with id = {id} not found...");
              }
 
-             return Ok(category);
+             var categoryDto = category.ToCategoryDto();
+             
+             return Ok(categoryDto);
          }
          
          [HttpPost]
-         public ActionResult<Category> PostCategory(Category category)
+         public ActionResult<CategoryDTO> PostCategory(Category category)
          {
              _unitOfWork.CategoryRepository.Create(category);
              
              _unitOfWork.Commit();
 
-             return Ok(category);
+             var categoryDto = category.ToCategoryDto();
+             
+             return Ok(categoryDto);
          }
      
          [HttpPut("{id:int}")]
@@ -75,8 +82,10 @@ namespace ApiCatalogo.Controllers
 
              _unitOfWork.CategoryRepository.Update(category);
              _unitOfWork.Commit();
+             
+             var categoryDto = category.ToCategoryDto();
 
-             return Ok(category);
+             return Ok(categoryDto);
          }
          
          [HttpDelete("{id:int}")]
@@ -87,8 +96,10 @@ namespace ApiCatalogo.Controllers
              _unitOfWork.CategoryRepository.Delete(category);
              
              _unitOfWork.Commit();
-
-             return Ok(category);
+            
+             var categoryDto = category.ToCategoryDto();
+             
+             return Ok(categoryDto);
          }
     }
 }
