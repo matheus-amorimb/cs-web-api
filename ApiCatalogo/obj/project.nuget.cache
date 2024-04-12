@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "4xdvU1+cieK66gsIrql6z29dy9vQA94Ec3Gz5GOa0TE0yPfNqW67STrWjtV/51oL43hWVGvTb1uoZ0+oKjrYTw==",
+  "dgSpecHash": "S7uKAX/CtRUkGtbzyOTVyHoPR01F3KW4DaxJiZxA9Fo8Ii04RKmijnFJlEnvVchPJ1XMNpHQ6T84EZmyFjSaFg==",
   "success": true,
   "projectFilePath": "/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj",
   "expectedPackageFiles": [
     "/home/matheus/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
-    "/home/matheus/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "/home/matheus/.nuget/packages/bouncycastle.cryptography/2.2.1/bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "/home/matheus/.nuget/packages/google.protobuf/3.25.1/google.protobuf.3.25.1.nupkg.sha512",
     "/home/matheus/.nuget/packages/humanizer/2.14.1/humanizer.2.14.1.nupkg.sha512",

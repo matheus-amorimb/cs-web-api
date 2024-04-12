@@ -1,6 +1,8 @@
 using ApiCatalogo.Context;
+using ApiCatalogo.DTOs;
 using ApiCatalogo.Models;
 using ApiCatalogo.Repositories;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -14,26 +16,28 @@ namespace ApiCatalogo.Controllers
     {
         // private readonly IProductRepository _unitOfWork.ProductRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public ProductsController(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public ProductsController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             // _unitOfWork.ProductRepository = repository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetAllProducts()
+        public ActionResult<IEnumerable<ProductDTO>> GetAllProducts()
         {
             var products = _unitOfWork.ProductRepository.GetAll().ToList();
             if (products is null)
             {
                 return NotFound();
             }
-
-            return Ok(products);
+            var productsDto = _mapper.Map<IEnumerable<ProductDTO>>(products);
+            return Ok(productsDto);
         }
         
         [HttpGet("{id:int}", Name = "GetProduct")]
-        public ActionResult<Product> GetProduct(int id)
+        public ActionResult<ProductDTO> GetProduct(int id)
         {
             var product = _unitOfWork.ProductRepository.GetById(p => p.ProductId == id);
 
@@ -41,12 +45,12 @@ namespace ApiCatalogo.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(product);
+            var productsDto = _mapper.Map<IEnumerable<ProductDTO>>(product);
+            return Ok(productsDto);
         }
 
         [HttpGet("Category/{id:int}")]
-        public ActionResult<IEnumerable<Product>> GetProductsByCategory(int id)
+        public ActionResult<IEnumerable<ProductDTO>> GetProductsByCategory(int id)
         {
             var products = _unitOfWork.ProductRepository.GetProductsByCategory(id).ToList();
             
@@ -54,39 +58,45 @@ namespace ApiCatalogo.Controllers
             {
                 return NotFound(); 
             }
-
+            var productsDto = _mapper.Map<IEnumerable<ProductDTO>>(products);
             return Ok(products);
             
         }
         
         [HttpPost]
-        public ActionResult<Product> PostProduct(Product product)
+        public ActionResult<Product> PostProduct(ProductDTO productDto)
         {
-            if (product is null)
+            if (productDto is null)
             {
                 return BadRequest();
             }
 
+            var product = _mapper.Map<Product>(productDto);
+            
             var newProduct = _unitOfWork.ProductRepository.Create(product);
             _unitOfWork.Commit();
 
+            var newProductDto = _mapper.Map<ProductDTO>(newProduct);
+            
             return new CreatedAtRouteResult("GetProduct",
-                new { id = newProduct.ProductId }, newProduct);
+                new { id = newProduct.ProductId }, newProductDto);
         }
         
         [HttpPut("{id:int}")]
-        public ActionResult<Product> UpdateProduct(int id, Product product)
+        public ActionResult<Product> UpdateProduct(int id, ProductDTO productDto)
         {
-            if (id != product.ProductId)
+            if (id != productDto.ProductId)
             {
                 return BadRequest();
             }
 
+            var product = _mapper.Map<Product>(productDto);
+            
             var isUpdated = _unitOfWork.ProductRepository.Update(product);
 
             _unitOfWork.Commit();
             
-            return isUpdated is not null ? Ok(product) : StatusCode(500, $"Fail to update the product of id = {id}");
+            return isUpdated is not null ? Ok(productDto) : StatusCode(500, $"Fail to update the product of id = {id}");
 
         }
 
