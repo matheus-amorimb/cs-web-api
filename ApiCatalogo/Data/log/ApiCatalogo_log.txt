@@ -421,3 +421,4 @@ SET AUTOCOMMIT = 1;
 UPDATE `Products` SET `CategoryId` = @p0, `Description` = @p1, `Name` = @p2, `Price` = @p3, `RegisterDate` = @p4, `Stock` = @p5, `UrlImage` = @p6
 WHERE `ProductId` = @p7;
 SELECT ROW_COUNT();
+Information: 0 - Application is shutting down...

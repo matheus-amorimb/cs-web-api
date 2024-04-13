@@ -1,5 +1,6 @@
 using ApiCatalogo.Context;
 using ApiCatalogo.Models;
+using ApiCatalogo.Parameters;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiCatalogo.Repositories;
@@ -10,6 +11,14 @@ public class ProductRepository : Repository<Product>, IProductRepository
 {
     public ProductRepository(AppDbContext context) : base(context)
     {
+    }
+
+    public IEnumerable<Product> GetProducts(ProductsParameter productsParameter)
+    {   
+        return this.GetAll()
+            .OrderBy(p => p.Name)
+            .Skip((productsParameter.PageNumber - 1) * productsParameter.PageSize)
+            .Take(productsParameter.PageSize).ToList();
     }
 
     public IEnumerable<Product> GetProductsByCategory(int id)
