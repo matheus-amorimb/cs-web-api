@@ -3,6 +3,7 @@ using ApiCatalogo.DTOs;
 using ApiCatalogo.Models;
 using ApiCatalogo.Repositories;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -25,19 +26,19 @@ namespace ApiCatalogo.Controllers
         }
         
         [HttpGet]
-        public ActionResult<IEnumerable<ProductDTO>> GetAllProducts()
+        public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
         {
             var products = _unitOfWork.ProductRepository.GetAll().ToList();
             if (products is null)
             {
                 return NotFound();
             }
-            var productsDto = _mapper.Map<IEnumerable<ProductDTO>>(products);
+            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
             return Ok(productsDto);
         }
         
         [HttpGet("{id:int}", Name = "GetProduct")]
-        public ActionResult<ProductDTO> GetProduct(int id)
+        public ActionResult<ProductDto> GetProduct(int id)
         {
             var product = _unitOfWork.ProductRepository.GetById(p => p.ProductId == id);
 
@@ -45,12 +46,12 @@ namespace ApiCatalogo.Controllers
             {
                 return NotFound();
             }
-            var productsDto = _mapper.Map<IEnumerable<ProductDTO>>(product);
+            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(product);
             return Ok(productsDto);
         }
 
         [HttpGet("Category/{id:int}")]
-        public ActionResult<IEnumerable<ProductDTO>> GetProductsByCategory(int id)
+        public ActionResult<IEnumerable<ProductDto>> GetProductsByCategory(int id)
         {
             var products = _unitOfWork.ProductRepository.GetProductsByCategory(id).ToList();
             
@@ -58,13 +59,13 @@ namespace ApiCatalogo.Controllers
             {
                 return NotFound(); 
             }
-            var productsDto = _mapper.Map<IEnumerable<ProductDTO>>(products);
+            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
             return Ok(products);
             
         }
         
         [HttpPost]
-        public ActionResult<Product> PostProduct(ProductDTO productDto)
+        public ActionResult<Product> PostProduct(ProductDto productDto)
         {
             if (productDto is null)
             {
@@ -76,14 +77,47 @@ namespace ApiCatalogo.Controllers
             var newProduct = _unitOfWork.ProductRepository.Create(product);
             _unitOfWork.Commit();
 
-            var newProductDto = _mapper.Map<ProductDTO>(newProduct);
+            var newProductDto = _mapper.Map<ProductDto>(newProduct);
             
             return new CreatedAtRouteResult("GetProduct",
                 new { id = newProduct.ProductId }, newProductDto);
         }
+
+        [HttpPatch("{id}/UpdatePartial")]
+        public ActionResult<ProductDtoUpdateResponse> Patch(int id,
+            JsonPatchDocument<ProductDtoUpdateRequest> patchProductDto)
+        {
+
+            if (patchProductDto is null || id <= 0)
+                return BadRequest();
+
+            var product = _unitOfWork.ProductRepository.GetById(c => c.ProductId == id);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            var productUpdateRequest = _mapper.Map<ProductDtoUpdateRequest>(product);
+            
+            patchProductDto.ApplyTo(productUpdateRequest, ModelState);
+
+            if (!ModelState.IsValid || TryValidateModel(productUpdateRequest))
+            {
+                return BadRequest(ModelState);
+            }
+
+            _mapper.Map(productUpdateRequest, product);
+
+            _unitOfWork.ProductRepository.Update(product);
+            _unitOfWork.Commit();
+
+            return Ok(_mapper.Map<ProductDtoUpdateRequest>(product));
+        }
+        
         
         [HttpPut("{id:int}")]
-        public ActionResult<Product> UpdateProduct(int id, ProductDTO productDto)
+        public ActionResult<Product> UpdateProduct(int id, ProductDto productDto)
         {
             if (id != productDto.ProductId)
             {
@@ -106,6 +140,8 @@ namespace ApiCatalogo.Controllers
             var product = _unitOfWork.ProductRepository.GetById(p => p.ProductId == id);
             var isDeleted = _unitOfWork.ProductRepository.Delete(product);
             _unitOfWork.Commit();
+
+            var productDto = _mapper.Map<ProductDto>(product);
             
             return isDeleted is not null ? Ok($"Product of id = {id} is deleted") : StatusCode(500, $"Fail to delete the product of id = {id}");
         }

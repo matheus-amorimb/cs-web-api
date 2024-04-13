@@ -7,7 +7,9 @@ public class DtoMappingProfile : Profile
 {
     public DtoMappingProfile()
     {
-        CreateMap<Product, ProductDTO>().ReverseMap();
-        CreateMap<Category, CategoryDTO>().ReverseMap();
+        CreateMap<Product, ProductDto>().ReverseMap();
+        CreateMap<Category, CategoryDto>().ReverseMap();
+        CreateMap<Product, ProductDtoUpdateRequest>().ReverseMap();
+        CreateMap<Product, ProductDtoUpdateResponse>().ReverseMap();
     }
 }   

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiCatalogo.DTOs;
 
-public class CategoryDTO
+public class CategoryDto
 {
     public int CategoryId { get; set; }
     

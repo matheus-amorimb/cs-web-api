@@ -490,3 +490,7 @@
 /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/obj/Debug/net8.0/ApiCatalogo.pdb
 /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/obj/Debug/net8.0/ApiCatalogo.genruntimeconfig.cache
 /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/obj/Debug/net8.0/ref/ApiCatalogo.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/AutoMapper.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll

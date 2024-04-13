@@ -1,10 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiCatalogo.DTOs;
 
-public class ProductDTO
+public class ProductDto
 {
+    [JsonIgnore]
     public int ProductId { get; set; }
     
     [Required]

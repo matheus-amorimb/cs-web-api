@@ -36,7 +36,7 @@ namespace ApiCatalogo.Controllers
         }
         
          [HttpGet]
-         public ActionResult<IEnumerable<CategoryDTO>> GetAllCategories()
+         public ActionResult<IEnumerable<CategoryDto>> GetAllCategories()
          {
              var categories = _unitOfWork.CategoryRepository.GetAll().ToList();
              var categoriesDTO = categories.ToCategoryDtOs();
@@ -44,7 +44,7 @@ namespace ApiCatalogo.Controllers
          }
          
          [HttpGet("{id:int}")]
-         public ActionResult<CategoryDTO> GetCategory(int id)
+         public ActionResult<CategoryDto> GetCategory(int id)
          {
              var category = _unitOfWork.CategoryRepository.GetById(p => p.CategoryId == id);
 
@@ -60,7 +60,7 @@ namespace ApiCatalogo.Controllers
          }
          
          [HttpPost]
-         public ActionResult<CategoryDTO> PostCategory(Category category)
+         public ActionResult<CategoryDto> PostCategory(Category category)
          {
              _unitOfWork.CategoryRepository.Create(category);
              

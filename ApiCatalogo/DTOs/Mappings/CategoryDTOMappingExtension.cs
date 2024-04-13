@@ -5,11 +5,11 @@ namespace ApiCatalogo.DTOs.Mappings;
 
 public static class CategoryDTOMappingExtension
 {
-    public static CategoryDTO? ToCategoryDto(this Category category)
+    public static CategoryDto? ToCategoryDto(this Category category)
     {
         if (category is null) return null;
 
-        return new CategoryDTO()
+        return new CategoryDto()
         {
             CategoryId = category.CategoryId,
             Name = category.Name,
@@ -17,7 +17,7 @@ public static class CategoryDTOMappingExtension
         };
     }    
     
-    public static Category? ToCategory(this CategoryDTO vCategoryDto)
+    public static Category? ToCategory(this CategoryDto vCategoryDto)
     {
         if (vCategoryDto is null) return null;
 
@@ -29,9 +29,9 @@ public static class CategoryDTOMappingExtension
         };
     }
     
-    public static IEnumerable<CategoryDTO?> ToCategoryDtOs(this IEnumerable<Category> categories)
+    public static IEnumerable<CategoryDto?> ToCategoryDtOs(this IEnumerable<Category> categories)
     {
-        if (categories is null) return new List<CategoryDTO>();
+        if (categories is null) return new List<CategoryDto>();
         
         return categories.Select(ToCategoryDto);
         
