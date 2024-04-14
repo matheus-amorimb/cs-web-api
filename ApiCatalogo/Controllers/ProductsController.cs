@@ -1,6 +1,7 @@
 using ApiCatalogo.Context;
 using ApiCatalogo.DTOs;
 using ApiCatalogo.Models;
+using ApiCatalogo.Parameters;
 using ApiCatalogo.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
@@ -25,6 +26,7 @@ namespace ApiCatalogo.Controllers
             _mapper = mapper;
         }
         
+        
         [HttpGet]
         public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
         {
@@ -34,6 +36,15 @@ namespace ApiCatalogo.Controllers
                 return NotFound();
             }
             var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+            return Ok(productsDto);
+        }
+
+        [HttpGet("pagination")]
+        public ActionResult<IEnumerable<ProductDto>> Get([FromQuery] ProductsParameter productsParameter)
+        {
+            var products = _unitOfWork.ProductRepository.GetProducts(productsParameter);
+            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+
             return Ok(productsDto);
         }
         
