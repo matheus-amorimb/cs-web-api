@@ -52,6 +52,19 @@ namespace ApiCatalogo.Controllers
          {
              var categories = _unitOfWork.CategoryRepository.GetCategories(categoriesParameter);
 
+             return GetCategories(categories);
+         }
+
+         [HttpGet("filter/name/pagination")]
+         public ActionResult<IEnumerable<CategoryDto>> GetCategoriesFilterName([FromQuery] CategoriesFilterName categoriesFilterName)
+         {
+             var categories = _unitOfWork.CategoryRepository.GetCategoriesFilterName(categoriesFilterName);
+
+             return GetCategories(categories);
+         }
+
+         private ActionResult<IEnumerable<CategoryDto>> GetCategories(PagedList<Category> categories)
+         {
              var metadata = new
              {
                  categories.TotalCount,
@@ -68,8 +81,8 @@ namespace ApiCatalogo.Controllers
 
              return Ok(categoriesDto);
          }
-         
-         
+
+
          [HttpGet("{id:int}")]
          public ActionResult<CategoryDto> GetCategory(int id)
          {
