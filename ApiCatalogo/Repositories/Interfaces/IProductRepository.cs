@@ -9,9 +9,9 @@ namespace ApiCatalogo.Repositories;
 public interface IProductRepository : IRepository<Product>
 {
     // IEnumerable<Product> GetProducts(ProductsParameter productsParameter);
-    PagedList<Product> GetProducts(ProductsParameter productsParameter);
-    PagedList<Product> GetProductsFilterPrice(ProductsFilterPrice productsFilterPrice);
-    IEnumerable<Product> GetProductsByCategory(int id);
+    Task<PagedList<Product>> GetProductsAsync(ProductsParameter productsParameter);
+    Task<PagedList<Product>> GetProductsFilterPriceAsync(ProductsFilterPrice productsFilterPrice);
+    Task<IEnumerable<Product>> GetProductsByCategoryAsync(int id);
 }
 
 //================================================
