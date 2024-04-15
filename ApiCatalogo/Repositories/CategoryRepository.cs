@@ -1,5 +1,6 @@
 using ApiCatalogo.Context;
 using ApiCatalogo.Models;
+using ApiCatalogo.Parameters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,20 @@ public class CategoryRepository : Repository<Category>, ICategoryRepository
 {
     public CategoryRepository(AppDbContext context) : base(context)
     {
+    }
+
+    public PagedList<Category> GetCategories(CategoriesParameter categoriesParameter)
+    {
+        var categories = this
+            .GetAll()
+            .OrderBy(c => c.CategoryId)
+            .AsQueryable();
+
+        var categoriesSorted = PagedList<Category>.ToPagedList(categories,
+            categoriesParameter.PageNumber, 
+            categoriesParameter.PageSize);
+
+        return categoriesSorted;
     }
 }
 

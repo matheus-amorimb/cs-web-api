@@ -3,8 +3,10 @@ using ApiCatalogo.DTOs;
 using ApiCatalogo.DTOs.Mappings;
 using ApiCatalogo.Filters;
 using ApiCatalogo.Models;
+using ApiCatalogo.Parameters;
 using ApiCatalogo.Repositories;
 using ApiCatalogo.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,14 +27,16 @@ namespace ApiCatalogo.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _configuration;
         private readonly ILogger<CategoriesController> _logger;
+        private readonly IMapper _mapper;
 
         public CategoriesController(IUnitOfWork unitOfWork, IConfiguration configuration,
-            ILogger<CategoriesController> logger)
+            ILogger<CategoriesController> logger, IMapper mapper)
         {
             // _repository = repository;
             _unitOfWork = unitOfWork;
             _configuration = configuration;
             _logger = logger;
+            _mapper = mapper;
         }
         
          [HttpGet]
@@ -42,6 +46,29 @@ namespace ApiCatalogo.Controllers
              var categoriesDTO = categories.ToCategoryDtOs();
              return Ok(categoriesDTO);
          }
+         
+         [HttpGet("pagination")]
+         public ActionResult<IEnumerable<CategoryDto>> Get([FromQuery] CategoriesParameter categoriesParameter)
+         {
+             var categories = _unitOfWork.CategoryRepository.GetCategories(categoriesParameter);
+
+             var metadata = new
+             {
+                 categories.TotalCount,
+                 categories.PageSize,
+                 categories.CurrentPage,
+                 categories.TotalPages,
+                 categories.HasNext,
+                 categories.HasPrevious
+             };
+
+             Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));
+            
+             var categoriesDto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
+
+             return Ok(categoriesDto);
+         }
+         
          
          [HttpGet("{id:int}")]
          public ActionResult<CategoryDto> GetCategory(int id)

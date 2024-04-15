@@ -1,4 +1,5 @@
 using ApiCatalogo.Models;
+using ApiCatalogo.Parameters;
 
 namespace ApiCatalogo.Repositories;
 
@@ -7,6 +8,7 @@ namespace ApiCatalogo.Repositories;
 //================================================
 public interface ICategoryRepository : IRepository<Category>
 {
+    PagedList<Category> GetCategories(CategoriesParameter categoriesParameter);
     //
 }
 
