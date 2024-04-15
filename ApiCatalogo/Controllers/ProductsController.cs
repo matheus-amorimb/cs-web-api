@@ -45,6 +45,19 @@ namespace ApiCatalogo.Controllers
         {
             var products = _unitOfWork.ProductRepository.GetProducts(productsParameter);
 
+            return GetProducts(products);
+        }
+
+        [HttpGet("filter/price/pagination")]
+        public ActionResult<IEnumerable<ProductDto>> GetProductsFilterPrice([FromQuery] ProductsFilterPrice productsFilterPrice)
+        {
+            var products = _unitOfWork.ProductRepository.GetProductsFilterPrice(productsFilterPrice);
+
+            return GetProducts(products);
+        }
+
+        private ActionResult<IEnumerable<ProductDto>> GetProducts(PagedList<Product> products)
+        {
             var metadata = new
             {
                 products.TotalCount,
@@ -61,7 +74,7 @@ namespace ApiCatalogo.Controllers
 
             return Ok(productsDto);
         }
-        
+
         [HttpGet("{id:int}", Name = "GetProduct")]
         public ActionResult<ProductDto> GetProduct(int id)
         {
