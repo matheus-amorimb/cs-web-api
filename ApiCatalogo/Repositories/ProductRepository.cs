@@ -13,14 +13,28 @@ public class ProductRepository : Repository<Product>, IProductRepository
     {
     }
 
-    public IEnumerable<Product> GetProducts(ProductsParameter productsParameter)
-    {   
-        return this.GetAll()
-            .OrderBy(p => p.Name)
-            .Skip((productsParameter.PageNumber - 1) * productsParameter.PageSize)
-            .Take(productsParameter.PageSize).ToList();
-    }
+    // public IEnumerable<Product> GetProducts(ProductsParameter productsParameter)
+    // {   
+    //     return this.GetAll()
+    //         .OrderBy(p => p.Name)
+    //         .Skip((productsParameter.PageNumber - 1) * productsParameter.PageSize)
+    //         .Take(productsParameter.PageSize).ToList();
+    // }
 
+    public PagedList<Product> GetProducts(ProductsParameter productsParameter)
+    {
+        var products = this
+            .GetAll()
+            .OrderBy(p => p.ProductId)
+            .AsQueryable();
+
+        var productsSorted = PagedList<Product>.ToPagedList(products,
+            productsParameter.PageNumber, 
+            productsParameter.PageSize);
+
+        return productsSorted;
+    }
+    
     public IEnumerable<Product> GetProductsByCategory(int id)
     {
         return this.GetAll().Where(p => p.CategoryId == id);

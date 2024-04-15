@@ -8,7 +8,8 @@ namespace ApiCatalogo.Repositories;
 //================================================
 public interface IProductRepository : IRepository<Product>
 {
-    IEnumerable<Product> GetProducts(ProductsParameter productsParameter);
+    // IEnumerable<Product> GetProducts(ProductsParameter productsParameter);
+    PagedList<Product> GetProducts(ProductsParameter productsParameter);
     IEnumerable<Product> GetProductsByCategory(int id);
 }
 
