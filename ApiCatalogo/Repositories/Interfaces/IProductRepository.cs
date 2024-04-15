@@ -10,6 +10,7 @@ public interface IProductRepository : IRepository<Product>
 {
     // IEnumerable<Product> GetProducts(ProductsParameter productsParameter);
     PagedList<Product> GetProducts(ProductsParameter productsParameter);
+    PagedList<Product> GetProductsFilterPrice(ProductsFilterPrice productsFilterPrice);
     IEnumerable<Product> GetProductsByCategory(int id);
 }
 

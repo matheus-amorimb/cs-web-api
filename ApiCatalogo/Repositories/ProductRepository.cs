@@ -34,7 +34,12 @@ public class ProductRepository : Repository<Product>, IProductRepository
 
         return productsSorted;
     }
-    
+
+    public PagedList<Product> GetProductsFilterPrice(ProductsFilterPrice productsFilterPrice)
+    {
+        throw new NotImplementedException();
+    }
+
     public IEnumerable<Product> GetProductsByCategory(int id)
     {
         return this.GetAll().Where(p => p.CategoryId == id);
