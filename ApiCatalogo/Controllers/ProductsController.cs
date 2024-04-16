@@ -29,29 +29,29 @@ namespace ApiCatalogo.Controllers
         
         
         [HttpGet]
-        public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts()
         {
-            var products = _unitOfWork.ProductRepository.GetAll().ToList();
+            var products = await _unitOfWork.ProductRepository.GetAllAsync();
             if (products is null)
             {
                 return NotFound();
             }
-            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products.ToList());
             return Ok(productsDto);
         }
 
         [HttpGet("pagination")]
-        public ActionResult<IEnumerable<ProductDto>> Get([FromQuery] ProductsParameter productsParameter)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> Get([FromQuery] ProductsParameter productsParameter)
         {
-            var products = _unitOfWork.ProductRepository.GetProducts(productsParameter);
+            var products = await _unitOfWork.ProductRepository.GetProductsAsync(productsParameter);
 
             return GetProducts(products);
         }
 
         [HttpGet("filter/price/pagination")]
-        public ActionResult<IEnumerable<ProductDto>> GetProductsFilterPrice([FromQuery] ProductsFilterPrice productsFilterPrice)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsFilterPrice([FromQuery] ProductsFilterPrice productsFilterPrice)
         {
-            var products = _unitOfWork.ProductRepository.GetProductsFilterPrice(productsFilterPrice);
+            var products = await _unitOfWork.ProductRepository.GetProductsFilterPriceAsync(productsFilterPrice);
 
             return GetProducts(products);
         }
@@ -76,9 +76,9 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpGet("{id:int}", Name = "GetProduct")]
-        public ActionResult<ProductDto> GetProduct(int id)
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
-            var product = _unitOfWork.ProductRepository.GetById(p => p.ProductId == id);
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(p => p.ProductId == id);
 
             if (product is null)
             {
@@ -89,21 +89,21 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpGet("Category/{id:int}")]
-        public ActionResult<IEnumerable<ProductDto>> GetProductsByCategory(int id)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategory(int id)
         {
-            var products = _unitOfWork.ProductRepository.GetProductsByCategory(id).ToList();
+            var products = await _unitOfWork.ProductRepository.GetProductsByCategoryAsync(id);
             
             if (products is null)
             {
                 return NotFound(); 
             }
-            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products.ToList());
             return Ok(products);
             
         }
         
         [HttpPost]
-        public ActionResult<Product> PostProduct(ProductDto productDto)
+        public async Task<ActionResult<Product>> PostProduct(ProductDto productDto)
         {
             if (productDto is null)
             {
@@ -113,7 +113,7 @@ namespace ApiCatalogo.Controllers
             var product = _mapper.Map<Product>(productDto);
             
             var newProduct = _unitOfWork.ProductRepository.Create(product);
-            _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
 
             var newProductDto = _mapper.Map<ProductDto>(newProduct);
             
@@ -122,14 +122,14 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpPatch("{id}/UpdatePartial")]
-        public ActionResult<ProductDtoUpdateResponse> Patch(int id,
+        public async Task<ActionResult<ProductDtoUpdateResponse>> Patch(int id,
             JsonPatchDocument<ProductDtoUpdateRequest> patchProductDto)
         {
 
             if (patchProductDto is null || id <= 0)
                 return BadRequest();
 
-            var product = _unitOfWork.ProductRepository.GetById(c => c.ProductId == id);
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(c => c.ProductId == id);
 
             if (product is null)
             {
@@ -148,14 +148,14 @@ namespace ApiCatalogo.Controllers
             _mapper.Map(productUpdateRequest, product);
 
             _unitOfWork.ProductRepository.Update(product);
-            _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
 
             return Ok(_mapper.Map<ProductDtoUpdateRequest>(product));
         }
         
         
         [HttpPut("{id:int}")]
-        public ActionResult<Product> UpdateProduct(int id, ProductDto productDto)
+        public async Task<ActionResult<Product>> UpdateProduct(int id, ProductDto productDto)
         {
             if (id != productDto.ProductId)
             {
@@ -166,18 +166,18 @@ namespace ApiCatalogo.Controllers
             
             var isUpdated = _unitOfWork.ProductRepository.Update(product);
 
-            _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
             
             return isUpdated is not null ? Ok(productDto) : StatusCode(500, $"Fail to update the product of id = {id}");
 
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult<bool> DeleteProduct(int id)
+        public async Task<ActionResult<bool>> DeleteProduct(int id)
         {
-            var product = _unitOfWork.ProductRepository.GetById(p => p.ProductId == id);
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(p => p.ProductId == id);
             var isDeleted = _unitOfWork.ProductRepository.Delete(product);
-            _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
 
             var productDto = _mapper.Map<ProductDto>(product);
             

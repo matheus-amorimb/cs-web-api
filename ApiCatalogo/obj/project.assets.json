@@ -2820,6 +2820,30 @@
           }
         }
       },
+      "X.PagedList/9.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/X.PagedList.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/X.PagedList.dll": {}
+        }
+      },
+      "X.PagedList.Mvc.Core/9.1.2": {
+        "type": "package",
+        "dependencies": {
+          "X.PagedList": "9.1.2"
+        },
+        "compile": {
+          "lib/net8.0/X.PagedList.Mvc.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/X.PagedList.Mvc.Core.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "ZstdSharp.Port/0.7.1": {
         "type": "package",
         "compile": {
@@ -8424,6 +8448,38 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "X.PagedList/9.1.2": {
+      "sha512": "qePK/lt+Y8PeQM9E/DkWY/AIyxDVEMX0XFCU5CfLP1+Y9SUThFyaY8/QgldOg9uOJLvse1i3oAQDJOrhb3usdw==",
+      "type": "package",
+      "path": "x.pagedlist/9.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net6.0/X.PagedList.dll",
+        "lib/net8.0/X.PagedList.dll",
+        "lib/netstandard2.0/X.PagedList.dll",
+        "lib/netstandard2.1/X.PagedList.dll",
+        "x.pagedlist.9.1.2.nupkg.sha512",
+        "x.pagedlist.nuspec"
+      ]
+    },
+    "X.PagedList.Mvc.Core/9.1.2": {
+      "sha512": "+g8fJgXXVhl17BzVv8bGAkWooul23REeGNIJ4jUlA1Iqbw8Yq0OFMx/mGvjjEhIBNwDrjdhJKXGt7N7jejZWcQ==",
+      "type": "package",
+      "path": "x.pagedlist.mvc.core/9.1.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net6.0/X.PagedList.Mvc.Core.dll",
+        "lib/net8.0/X.PagedList.Mvc.Core.dll",
+        "x.pagedlist.mvc.core.9.1.2.nupkg.sha512",
+        "x.pagedlist.mvc.core.nuspec"
+      ]
+    },
     "ZstdSharp.Port/0.7.1": {
       "sha512": "Idgg+mJEyAujqDPzA3APy9dNoyw0YQcNA65GgYjktDRtJ+nvx/hv+J+m6Eax3JJMGEYGy04oc5YNP6ZvQ3Y1vQ==",
       "type": "package",
@@ -8455,7 +8511,8 @@
       "MySql.EntityFrameworkCore >= 8.0.0",
       "Pomelo.EntityFrameworkCore.MySql >= 8.0.1",
       "Swashbuckle.AspNetCore >= 6.4.0",
-      "System.ComponentModel.Annotations >= 5.0.0"
+      "System.ComponentModel.Annotations >= 5.0.0",
+      "X.PagedList.Mvc.Core >= 9.1.2"
     ]
   },
   "packageFolders": {
@@ -8542,6 +8599,10 @@
           "System.ComponentModel.Annotations": {
             "target": "Package",
             "version": "[5.0.0, )"
+          },
+          "X.PagedList.Mvc.Core": {
+            "target": "Package",
+            "version": "[9.1.2, )"
           }
         },
         "imports": [

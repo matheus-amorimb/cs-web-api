@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using X.PagedList;
 
 namespace ApiCatalogo.Controllers
 {
@@ -19,7 +20,7 @@ namespace ApiCatalogo.Controllers
 //############################ USING GENERIC REPOSITORY ############################
 //##################################################################################
     
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -40,30 +41,28 @@ namespace ApiCatalogo.Controllers
         }
         
          [HttpGet]
-         public ActionResult<IEnumerable<CategoryDto>> GetAllCategories()
+         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAllCategories()
          {
-             var categories = _unitOfWork.CategoryRepository.GetAll().ToList();
-             var categoriesDTO = categories.ToCategoryDtOs();
-             return Ok(categoriesDTO);
+             var categories = await _unitOfWork.CategoryRepository.GetAllAsync();
+             var categoriesDto = categories.ToList().ToCategoryDtOs();
+             return Ok(categoriesDto);
          }
          
          [HttpGet("pagination")]
-         public ActionResult<IEnumerable<CategoryDto>> Get([FromQuery] CategoriesParameter categoriesParameter)
+         public async Task<ActionResult<IEnumerable<CategoryDto>>> Get([FromQuery] CategoriesParameter categoriesParameter)
          {
-             var categories = _unitOfWork.CategoryRepository.GetCategories(categoriesParameter);
-
+             var categories = await _unitOfWork.CategoryRepository.GetCategoriesAsync(categoriesParameter);
              return GetCategories(categories);
          }
 
          [HttpGet("filter/name/pagination")]
-         public ActionResult<IEnumerable<CategoryDto>> GetCategoriesFilterName([FromQuery] CategoriesFilterName categoriesFilterName)
+         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesFilterName([FromQuery] CategoriesFilterName categoriesFilterName)
          {
-             var categories = _unitOfWork.CategoryRepository.GetCategoriesFilterName(categoriesFilterName);
-
+             var categories = await _unitOfWork.CategoryRepository.GetCategoriesFilterNameAsync(categoriesFilterName);
              return GetCategories(categories);
          }
 
-         private ActionResult<IEnumerable<CategoryDto>> GetCategories(PagedList<Category> categories)
+         private ActionResult<IEnumerable<CategoryDto>> GetCategories(IPagedList<Category> categories)
          {
              var metadata = new
              {
@@ -81,12 +80,11 @@ namespace ApiCatalogo.Controllers
 
              return Ok(categoriesDto);
          }
-
-
+         
          [HttpGet("{id:int}")]
-         public ActionResult<CategoryDto> GetCategory(int id)
+         public async Task<ActionResult<CategoryDto>> GetCategory(int id)
          {
-             var category = _unitOfWork.CategoryRepository.GetById(p => p.CategoryId == id);
+             var category = await _unitOfWork.CategoryRepository.GetByIdAsync(p => p.CategoryId == id);
 
              if (category is null)
              {
@@ -100,11 +98,11 @@ namespace ApiCatalogo.Controllers
          }
          
          [HttpPost]
-         public ActionResult<CategoryDto> PostCategory(Category category)
+         public async Task<ActionResult<CategoryDto>> PostCategory(Category category)
          {
              _unitOfWork.CategoryRepository.Create(category);
              
-             _unitOfWork.Commit();
+             await _unitOfWork.CommitAsync();
 
              var categoryDto = category.ToCategoryDto();
              
@@ -112,7 +110,7 @@ namespace ApiCatalogo.Controllers
          }
      
          [HttpPut("{id:int}")]
-         public ActionResult Put(int id, Category category)
+         public async Task<ActionResult> Put(int id, Category category)
          {
              if (id != category.CategoryId)
              {
@@ -121,7 +119,7 @@ namespace ApiCatalogo.Controllers
              }
 
              _unitOfWork.CategoryRepository.Update(category);
-             _unitOfWork.Commit();
+             await _unitOfWork.CommitAsync();
              
              var categoryDto = category.ToCategoryDto();
 
@@ -129,13 +127,13 @@ namespace ApiCatalogo.Controllers
          }
          
          [HttpDelete("{id:int}")]
-         public ActionResult Delete(int id)
+         public async Task<ActionResult> Delete(int id)
          {
-             var category = _unitOfWork.CategoryRepository.GetById(p => p.CategoryId == id);
+             var category = await _unitOfWork.CategoryRepository.GetByIdAsync(p => p.CategoryId == id);
 
              _unitOfWork.CategoryRepository.Delete(category);
              
-             _unitOfWork.Commit();
+             await _unitOfWork.CommitAsync();
             
              var categoryDto = category.ToCategoryDto();
              

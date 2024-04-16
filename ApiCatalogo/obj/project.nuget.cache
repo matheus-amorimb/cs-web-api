@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bVG2G/EOCCVn4do7qXOp31e5OXAH3wySEtyLratw623bciKoNlec6pIDDJPwTiU0NxpY8ximSOftbIL7sQL6bA==",
+  "dgSpecHash": "o6kGHw+mXD/K3aYxPntgQxWYeOJE6TdCmALn52uQG6CW8PYGmJ6dIZ0vQrjsu08JmSyjJ7Q3lnaKwUG5LsF6+A==",
   "success": true,
   "projectFilePath": "/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/ApiCatalogo.csproj",
   "expectedPackageFiles": [
@@ -169,6 +169,8 @@
     "/home/matheus/.nuget/packages/system.threading.tasks.dataflow/7.0.0/system.threading.tasks.dataflow.7.0.0.nupkg.sha512",
     "/home/matheus/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/home/matheus/.nuget/packages/system.windows.extensions/7.0.0/system.windows.extensions.7.0.0.nupkg.sha512",
+    "/home/matheus/.nuget/packages/x.pagedlist/9.1.2/x.pagedlist.9.1.2.nupkg.sha512",
+    "/home/matheus/.nuget/packages/x.pagedlist.mvc.core/9.1.2/x.pagedlist.mvc.core.9.1.2.nupkg.sha512",
     "/home/matheus/.nuget/packages/zstdsharp.port/0.7.1/zstdsharp.port.0.7.1.nupkg.sha512"
   ],
   "logs": []

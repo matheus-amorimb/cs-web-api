@@ -1,5 +1,6 @@
 using ApiCatalogo.Models;
 using ApiCatalogo.Parameters;
+using X.PagedList;
 
 namespace ApiCatalogo.Repositories;
 
@@ -8,8 +9,8 @@ namespace ApiCatalogo.Repositories;
 //================================================
 public interface ICategoryRepository : IRepository<Category>
 {
-    Task<PagedList<Category>> GetCategoriesFilterNameAsync(CategoriesFilterName categoriesFilterName);
-    Task<PagedList<Category>> GetCategoriesAsync(CategoriesParameter categoriesParameter);
+    Task<IPagedList<Category>> GetCategoriesFilterNameAsync(CategoriesFilterName categoriesFilterName);
+    Task<IPagedList<Category>> GetCategoriesAsync(CategoriesParameter categoriesParameter);
 }
 
 

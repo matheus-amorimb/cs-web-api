@@ -21,51 +21,55 @@ public class ProductRepository : Repository<Product>, IProductRepository
     //         .Take(productsParameter.PageSize).ToList();
     // }
 
-    public PagedList<Product> GetProducts(ProductsParameter productsParameter)
+    public async Task<PagedList<Product>> GetProductsAsync(ProductsParameter productsParameter)
     {
-        var products = this
-            .GetAll()
-            .OrderBy(p => p.ProductId)
+        var products = await this
+            .GetAllAsync();
+            
+        var productsOrdered = products.OrderBy(p => p.ProductId)
             .AsQueryable();
 
-        var productsSorted = PagedList<Product>.ToPagedList(products,
+        var productsSorted = PagedList<Product>.ToPagedList(productsOrdered,
             productsParameter.PageNumber, 
             productsParameter.PageSize);
 
         return productsSorted;
     }
 
-    public PagedList<Product> GetProductsFilterPrice(ProductsFilterPrice productsFilterPrice)
+    public async Task<PagedList<Product>> GetProductsFilterPriceAsync(ProductsFilterPrice productsFilterPrice)
     {
-        var products = this.GetAll().AsQueryable();
-
+        var products = await this.GetAllAsync();
+        
+        var productsQueryable = products.AsQueryable();
+        
         if (productsFilterPrice.Price.HasValue && !string.IsNullOrEmpty(productsFilterPrice.PriceCriteria))
         {
             if (productsFilterPrice.PriceCriteria.Equals("greater", StringComparison.OrdinalIgnoreCase))
             {
-                products = products.Where(p => p.Price > productsFilterPrice.Price.Value)
+                productsQueryable = productsQueryable.Where(p => p.Price > productsFilterPrice.Price.Value)
                     .OrderBy(p => p.Price);
             }
             else if (productsFilterPrice.PriceCriteria.Equals("lower", StringComparison.OrdinalIgnoreCase))
             {
-                products = products.Where(p => p.Price < productsFilterPrice.Price.Value)
+                productsQueryable = productsQueryable.Where(p => p.Price < productsFilterPrice.Price.Value)
                     .OrderBy(p => p.Price);
             }
             else if (productsFilterPrice.PriceCriteria.Equals("equal", StringComparison.OrdinalIgnoreCase))
             {
-                products = products.Where(p => p.Price == productsFilterPrice.Price.Value)
+                productsQueryable = productsQueryable.Where(p => p.Price == productsFilterPrice.Price.Value)
                     .OrderBy(p => p.Price);
             }
         }
         
-        var filteredProducts = PagedList<Product>.ToPagedList(products, productsFilterPrice.PageNumber, productsFilterPrice.PageSize);
+        var filteredProducts = PagedList<Product>.ToPagedList(productsQueryable, productsFilterPrice.PageNumber, productsFilterPrice.PageSize);
         
         return filteredProducts;
     }
 
-    public IEnumerable<Product> GetProductsByCategory(int id)
+    public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int id)
     {
-        return this.GetAll().Where(p => p.CategoryId == id);
+        var products = await this.GetAllAsync();
+        return products.Where(p => p.CategoryId == id);
     }
 }
 
