@@ -494,3 +494,13 @@
 /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
 /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/X.PagedList.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/X.PagedList.Mvc.Core.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll

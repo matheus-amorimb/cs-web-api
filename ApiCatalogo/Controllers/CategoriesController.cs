@@ -7,6 +7,7 @@ using ApiCatalogo.Parameters;
 using ApiCatalogo.Repositories;
 using ApiCatalogo.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,6 +42,7 @@ namespace ApiCatalogo.Controllers
         }
         
          [HttpGet]
+         [Authorize]
          public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAllCategories()
          {
              var categories = await _unitOfWork.CategoryRepository.GetAllAsync();

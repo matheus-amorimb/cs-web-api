@@ -592,3 +592,23 @@ Information: 14 - Now listening on: http://localhost:5100
 Information: 0 - Application started. Press Ctrl+C to shut down.
 Information: 0 - Hosting environment: Development
 Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (76ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 0 - Application is shutting down...
+Warning: 35 - No XML encryptor configured. Key {992bf493-ca35-4f6c-8c28-1eebefe3c2cb} may be persisted to storage in unencrypted form.
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
