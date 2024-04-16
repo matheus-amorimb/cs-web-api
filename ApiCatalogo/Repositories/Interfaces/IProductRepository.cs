@@ -1,5 +1,6 @@
 using ApiCatalogo.Models;
 using ApiCatalogo.Parameters;
+using X.PagedList;
 
 namespace ApiCatalogo.Repositories;
 
@@ -9,8 +10,8 @@ namespace ApiCatalogo.Repositories;
 public interface IProductRepository : IRepository<Product>
 {
     // IEnumerable<Product> GetProducts(ProductsParameter productsParameter);
-    Task<PagedList<Product>> GetProductsAsync(ProductsParameter productsParameter);
-    Task<PagedList<Product>> GetProductsFilterPriceAsync(ProductsFilterPrice productsFilterPrice);
+    Task<IPagedList<Product>> GetProductsAsync(ProductsParameter productsParameter);
+    Task<IPagedList<Product>> GetProductsFilterPriceAsync(ProductsFilterPrice productsFilterPrice);
     Task<IEnumerable<Product>> GetProductsByCategoryAsync(int id);
 }
 

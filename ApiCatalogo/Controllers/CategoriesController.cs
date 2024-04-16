@@ -66,12 +66,12 @@ namespace ApiCatalogo.Controllers
          {
              var metadata = new
              {
-                 categories.TotalCount,
+                 categories.Count,
                  categories.PageSize,
-                 categories.CurrentPage,
-                 categories.TotalPages,
-                 categories.HasNext,
-                 categories.HasPrevious
+                 categories.PageCount,
+                 categories.TotalItemCount,
+                 categories.HasNextPage,
+                 categories.HasPreviousPage
              };
 
              Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));

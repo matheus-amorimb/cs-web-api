@@ -2,6 +2,7 @@ using ApiCatalogo.Context;
 using ApiCatalogo.Models;
 using ApiCatalogo.Parameters;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace ApiCatalogo.Repositories;
 //================================================
@@ -21,7 +22,7 @@ public class ProductRepository : Repository<Product>, IProductRepository
     //         .Take(productsParameter.PageSize).ToList();
     // }
 
-    public async Task<PagedList<Product>> GetProductsAsync(ProductsParameter productsParameter)
+    public async Task<IPagedList<Product>> GetProductsAsync(ProductsParameter productsParameter)
     {
         var products = await this
             .GetAllAsync();
@@ -29,14 +30,16 @@ public class ProductRepository : Repository<Product>, IProductRepository
         var productsOrdered = products.OrderBy(p => p.ProductId)
             .AsQueryable();
 
-        var productsSorted = PagedList<Product>.ToPagedList(productsOrdered,
-            productsParameter.PageNumber, 
-            productsParameter.PageSize);
+        // var productsSorted = PagedList<Product>.ToPagedList(productsOrdered,
+        //     productsParameter.PageNumber, 
+        //     productsParameter.PageSize);
+
+        var productsSorted = await productsOrdered.ToPagedListAsync(productsParameter.PageNumber, productsParameter.PageSize);
 
         return productsSorted;
     }
 
-    public async Task<PagedList<Product>> GetProductsFilterPriceAsync(ProductsFilterPrice productsFilterPrice)
+    public async Task<IPagedList<Product>> GetProductsFilterPriceAsync(ProductsFilterPrice productsFilterPrice)
     {
         var products = await this.GetAllAsync();
         
@@ -61,7 +64,10 @@ public class ProductRepository : Repository<Product>, IProductRepository
             }
         }
         
-        var filteredProducts = PagedList<Product>.ToPagedList(productsQueryable, productsFilterPrice.PageNumber, productsFilterPrice.PageSize);
+        // var filteredProducts = Parameters.PagedList<Product>.ToPagedList(productsQueryable, productsFilterPrice.PageNumber, productsFilterPrice.PageSize);
+
+        var filteredProducts = await
+            productsQueryable.ToPagedListAsync(productsFilterPrice.PageNumber, productsFilterPrice.PageSize);
         
         return filteredProducts;
     }
