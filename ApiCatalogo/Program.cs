@@ -5,6 +5,7 @@ using ApiCatalogo.Filters;
 using ApiCatalogo.Logging;
 using ApiCatalogo.Repositories;
 using ApiCatalogo.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,10 @@ builder.Services.AddSwaggerGen();
 
 // Add services to the container
 string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection));
