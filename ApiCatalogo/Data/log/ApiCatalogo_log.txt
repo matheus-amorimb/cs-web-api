@@ -735,3 +735,19 @@ ALTER TABLE `AspNetUsers` ADD `RefreshTokenExpiryTime` datetime(6) NOT NULL DEFA
 Information: 20101 - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
 VALUES ('20240418215007_AdjustmentApplicationUser', '8.0.4');
+Critical: 6 - Application startup exception
+Error: 11 - Hosting failed to start
+Critical: 6 - Application startup exception
+Error: 11 - Hosting failed to start
+Critical: 6 - Application startup exception
+Error: 11 - Hosting failed to start
+Critical: 6 - Application startup exception
+Error: 11 - Hosting failed to start
+Critical: 6 - Application startup exception
+Error: 11 - Hosting failed to start
+Critical: 6 - Application startup exception
+Error: 11 - Hosting failed to start
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
