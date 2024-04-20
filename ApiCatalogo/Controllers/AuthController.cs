@@ -32,12 +32,11 @@ namespace ApiCatalogo.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModelDto modelDto)
+        public async Task<IActionResult> Login([FromBody] LoginModelDto login)
         {
-            var user = await _userManager.FindByNameAsync(modelDto.UserName!);
-
-
-            if (user is not null && await _userManager.CheckPasswordAsync(user, modelDto.Password!))
+            var user = await _userManager.FindByNameAsync(login.UserName!);
+            
+            if (user is not null && await _userManager.CheckPasswordAsync(user, login.Password!))
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -78,6 +77,46 @@ namespace ApiCatalogo.Controllers
             return Unauthorized();
 
         }
-        
+
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterModelDto register)
+        {
+            var userExists = await _userManager.FindByNameAsync(register.UserName!);
+
+            if (userExists is not null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseDto()
+                {
+                    Status = "Error",
+                    Message = "User already exists."
+                });
+            }
+
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = register.Email,
+                UserName = register.UserName,
+                SecurityStamp = Guid.NewGuid().ToString()
+
+            };
+            
+            var result = await _userManager.CreateAsync(user, register.Password!);
+
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseDto()
+                {
+                    Status = "Error",
+                    Message = "User creation failed."
+                });
+            }
+
+            return Ok(new ResponseDto()
+            {
+                Status = "Success",
+                Message = "User created successfully"
+            });
+        }
     }
 }
