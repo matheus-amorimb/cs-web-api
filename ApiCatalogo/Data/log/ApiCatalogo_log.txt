@@ -762,3 +762,4 @@ SELECT `a`.`Id`, `a`.`AccessFailedCount`, `a`.`ConcurrencyStamp`, `a`.`Email`, `
 FROM `AspNetUsers` AS `a`
 WHERE `a`.`NormalizedUserName` = @__normalizedUserName_0
 LIMIT 1
+Information: 0 - Application is shutting down...
