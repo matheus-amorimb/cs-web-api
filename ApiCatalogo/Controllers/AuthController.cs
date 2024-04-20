@@ -67,6 +67,7 @@ namespace ApiCatalogo.Controllers
 
                 return Ok(new
                 {
+                    Message = "Login successful",
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
                     RefreshToken = refreshToken,
                     Expiration = token.ValidTo
@@ -103,12 +104,14 @@ namespace ApiCatalogo.Controllers
             
             var result = await _userManager.CreateAsync(user, register.Password!);
 
+            Console.WriteLine(result);
+
             if (!result.Succeeded)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new ResponseDto()
                 {
                     Status = "Error",
-                    Message = "User creation failed."
+                    Message = $"{result.ToString()}"
                 });
             }
 
@@ -116,6 +119,49 @@ namespace ApiCatalogo.Controllers
             {
                 Status = "Success",
                 Message = "User created successfully"
+            });
+        }
+
+        [HttpPost]
+        [Route("refresh-token")]
+        public async Task<IActionResult> RefreshToken(TokenModelDto tokenModelDto)
+        {
+            if (tokenModelDto is null)
+            {
+                return BadRequest("Invalid client request");
+            }
+
+            string? accessToken = tokenModelDto.AccessToken ?? throw new ArgumentException(nameof(tokenModelDto));
+            string? refreshToken = tokenModelDto.RefreshToken ?? throw new ArgumentException(nameof(tokenModelDto));
+
+            var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken!, _configuration);
+
+            if (principal is null)
+            {
+                return BadRequest("Invalid access token/refresh token");
+            }
+
+            string username = principal.Identity.Name;
+
+            var user = await _userManager.FindByNameAsync(username!);
+
+            if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+            {
+                return BadRequest("Invalid access token/refresh token");
+            }
+
+            var newAccessToken = _tokenService.GenerateAccessToken(principal.Claims.ToList(), _configuration);
+            
+            var newRefreshToken = _tokenService.GenerateRefreshToken();
+
+            user.RefreshToken = newRefreshToken;
+
+            await _userManager.UpdateAsync(user);
+
+            return new ObjectResult(new
+            {
+                accessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
+                refreshToken = newRefreshToken
             });
         }
     }
