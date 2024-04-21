@@ -124,6 +124,7 @@ namespace ApiCatalogo.Controllers
                 {
                     new Claim(ClaimTypes.Name, user.UserName!),
                     new Claim(ClaimTypes.Email, user.Email!),
+                    new Claim("id", user.UserName!),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
@@ -154,9 +155,7 @@ namespace ApiCatalogo.Controllers
                 });
 
             };
-
             return Unauthorized();
-
         }
 
         [HttpPost]

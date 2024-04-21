@@ -73,7 +73,25 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ITokenService, TokenService>();
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policyBuilder => 
+        policyBuilder.RequireRole("Admin"));
+
+    options.AddPolicy("SuperAdminOnly", policyBuilder => 
+        policyBuilder.RequireRole("Admin")
+            .RequireClaim("id", "matheus"));
+
+    options.AddPolicy("UserOnly", policyBuilder => 
+        policyBuilder.RequireRole("User"));
+
+    options.AddPolicy("ExclusiveOnly", policyBuilder => 
+        policyBuilder.RequireAssertion(context =>
+            context.User.HasClaim(claim =>
+                claim.Type == "id" && claim.Value == "matheus" || context.User.IsInRole("SuperAdmin")
+            )
+        ));
+});
 
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
     {
