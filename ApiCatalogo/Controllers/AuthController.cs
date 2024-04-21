@@ -19,18 +19,62 @@ namespace ApiCatalogo.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly ILogger<AuthController> _logger;
 
         public AuthController(ITokenService tokenService, 
             UserManager<ApplicationUser> userManager, 
             RoleManager<IdentityRole> roleManager, 
-            IConfiguration configuration)
+            IConfiguration configuration, 
+            ILogger<AuthController> logger)
         {
             _tokenService = tokenService;
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _logger = logger;
         }
 
+        [HttpPost]
+        [Route("CreateRole")]
+        public async Task<IActionResult> CreateRole(string roleName)
+        {
+            var roleExists = await _roleManager.RoleExistsAsync(roleName);
+
+            if (!roleExists)
+            {
+                var role = new IdentityRole(roleName);
+                var response = await _roleManager.CreateAsync(role);
+
+                if (response.Succeeded)
+                {
+                    _logger.LogInformation(1, "Role Added");
+                    return StatusCode(StatusCodes.Status200OK,
+                        new ResponseDto()
+                        {
+                            Status = "Success",
+                            Message = $"Role {roleName} added successfully"
+                        });
+                }
+                
+                return StatusCode(StatusCodes.Status400BadRequest,
+                    new ResponseDto()
+                    {
+                        Status = "Error",
+                        Message = $"Issue adding the new {roleName} role"
+                    });
+            }
+            
+            return StatusCode(StatusCodes.Status400BadRequest,
+                new ResponseDto()
+                {
+                    Status = "Error",
+                    Message = "Role already exists."
+                });
+        }
+        
+        
+        
+        
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModelDto login)
