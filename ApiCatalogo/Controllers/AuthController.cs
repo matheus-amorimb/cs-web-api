@@ -71,8 +71,43 @@ namespace ApiCatalogo.Controllers
                     Message = "Role already exists."
                 });
         }
-        
-        
+
+        [HttpPost]
+        [Route("AddUserToRole")]
+        public async Task<IActionResult> AddUserToRole(string email, string roleName)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user is not null)
+            {
+                var response = await _userManager.AddToRoleAsync(user, roleName);
+
+                if (response.Succeeded)
+                {
+                    return StatusCode(StatusCodes.Status200OK,
+                        new ResponseDto()
+                        {
+                            Status = "Success",
+                            Message = $"User added to role {roleName} successfully"
+                        });
+                }
+                
+                return StatusCode(StatusCodes.Status400BadRequest,
+                    new ResponseDto()
+                    {
+                        Status = "Error",
+                        Message = $"Issue adding user to role {roleName} successfully"
+                    });
+
+            }
+
+            return StatusCode(StatusCodes.Status400BadRequest,
+                new ResponseDto()
+                {
+                    Status = "Error",
+                    Message = "User not found."
+                });
+        }
         
         
         [HttpPost]
