@@ -42,7 +42,6 @@ namespace ApiCatalogo.Controllers
         }
         
          [HttpGet]
-         [Authorize]
          public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAllCategories()
          {
              var categories = await _unitOfWork.CategoryRepository.GetAllAsync();
@@ -129,6 +128,7 @@ namespace ApiCatalogo.Controllers
          }
          
          [HttpDelete("{id:int}")]
+         [Authorize(Policy = "AdminOnly")]
          public async Task<ActionResult> Delete(int id)
          {
              var category = await _unitOfWork.CategoryRepository.GetByIdAsync(p => p.CategoryId == id);
