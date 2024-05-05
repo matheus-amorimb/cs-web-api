@@ -1334,3 +1334,88 @@ UPDATE `AspNetUsers` SET `AccessFailedCount` = @p0, `ConcurrencyStamp` = @p1, `E
 WHERE `Id` = @p16 AND `ConcurrencyStamp` = @p17;
 SELECT ROW_COUNT();
 Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (67ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (17ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (64ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 20101 - Executed DbCommand (13ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 20101 - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 0 - Application is shutting down...
+Warning: 16 - The WebRootPath was not found: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/wwwroot. Static files may be unavailable.
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (72ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 20101 - Executed DbCommand (15ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 20101 - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 0 - Application is shutting down...
+Warning: 16 - The WebRootPath was not found: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/wwwroot. Static files may be unavailable.
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (57ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 20101 - Executed DbCommand (15ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProductId`, `p`.`CategoryId`, `p`.`Description`, `p`.`Name`, `p`.`Price`, `p`.`RegisterDate`, `p`.`Stock`, `p`.`UrlImage`
+FROM `Products` AS `p`
+Information: 0 - Application is shutting down...
+Warning: 16 - The WebRootPath was not found: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/wwwroot. Static files may be unavailable.
+Warning: 8 - The ASP.NET Core developer certificate is not trusted. For information about trusting the ASP.NET Core developer certificate, see https://aka.ms/aspnet/https-trust-dev-cert.
+Information: 14 - Now listening on: https://localhost:7291
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Information: 20101 - Executed DbCommand (60ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (16ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 0 - Application is shutting down...
