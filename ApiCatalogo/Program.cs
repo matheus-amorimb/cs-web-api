@@ -24,17 +24,16 @@ builder.Services.AddControllers(options =>
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; 
     });
 
-var originsWithAccessAllowed = "_originsWithAccessAllowed";
+// var originsWithAccessAllowed = "_originsWithAccessAllowed";
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: originsWithAccessAllowed,
+    options.AddPolicy(name: "originsWithAccessAllowed",
         policyBuilder =>
         {
-            policyBuilder.WithOrigins("https://www.apirequest.io/")
-                .WithMethods("GET")
-                .AllowAnyHeader()
-                .AllowCredentials();
+            policyBuilder.WithOrigins("http://localhost:5169")
+                .WithMethods("GET", "POST")
+                .AllowAnyHeader();
         });
 });
 
@@ -161,7 +160,7 @@ app.UseAuthentication();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseCors(originsWithAccessAllowed);
+app.UseCors();
 
 app.UseAuthorization();
 

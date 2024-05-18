@@ -8,6 +8,7 @@ using ApiCatalogo.Repositories;
 using ApiCatalogo.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +21,7 @@ namespace ApiCatalogo.Controllers
 //##################################################################################
 //############################ USING GENERIC REPOSITORY ############################
 //##################################################################################
-    
+    [EnableCors("originsWithAccessAllowed")]
     [Route("[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -82,6 +83,7 @@ namespace ApiCatalogo.Controllers
              return Ok(categoriesDto);
          }
          
+         [DisableCors]
          [HttpGet("{id:int}")]
          public async Task<ActionResult<CategoryDto>> GetCategory(int id)
          {
