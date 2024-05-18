@@ -26,13 +26,17 @@ builder.Services.AddControllers(options =>
 
 var originsWithAccessAllowed = "_originsWithAccessAllowed";
 
-builder.Services.AddCors(options => 
+builder.Services.AddCors(options =>
+{
     options.AddPolicy(name: originsWithAccessAllowed,
-    policyBuilder =>
-    {
-        policyBuilder.WithOrigins("https://www.apirequest.io/").AllowAnyMethod();
-    })
-);
+        policyBuilder =>
+        {
+            policyBuilder.WithOrigins("https://www.apirequest.io/")
+                .WithMethods("GET")
+                .AllowAnyHeader()
+                .AllowCredentials();
+        });
+});
 
 builder.Services.AddEndpointsApiExplorer();
 
