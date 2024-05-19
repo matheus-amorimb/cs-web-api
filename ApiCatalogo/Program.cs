@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json.Serialization;
+using System.Threading.RateLimiting;
 using ApiCatalogo.Context;
 using ApiCatalogo.DTOs.Mappings;
 using ApiCatalogo.Filters;
@@ -9,6 +10,7 @@ using ApiCatalogo.Repositories;
 using ApiCatalogo.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -134,6 +136,19 @@ builder.Services.AddAuthorization(options =>
         ));
 });
 
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter(policyName: "fixedwindow", limiterOptions =>
+    {
+        limiterOptions.PermitLimit = 1;
+        limiterOptions.Window = TimeSpan.FromSeconds(5);
+        limiterOptions.QueueLimit = 2;
+        limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+    });
+
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+});
+
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
     {
         LogLevel = LogLevel.Information
@@ -159,7 +174,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseStaticFiles();
 app.UseRouting();
-
+app.UseRateLimiter();
 app.UseCors();
 
 app.UseAuthorization();

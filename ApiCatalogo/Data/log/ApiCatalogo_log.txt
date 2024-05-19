@@ -1516,3 +1516,29 @@ SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
 FROM `Categories` AS `c`
 WHERE `c`.`CategoryId` = @__id_0
 LIMIT 1
+Information: 0 - Application is shutting down...
+Warning: 16 - The WebRootPath was not found: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/wwwroot. Static files may be unavailable.
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (53ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (23ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 20101 - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
+Information: 0 - Application is shutting down...
+Warning: 16 - The WebRootPath was not found: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo/wwwroot. Static files may be unavailable.
+Information: 14 - Now listening on: http://localhost:5100
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/matheus/matheus-dev/code/cs/web-api-asp-net-core/ApiCatalogo/ApiCatalogo
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (59ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoryId`, `c`.`Name`, `c`.`UrlImage`
+FROM `Categories` AS `c`
