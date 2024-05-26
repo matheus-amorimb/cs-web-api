@@ -14,7 +14,7 @@ using X.PagedList;
 namespace ApiCatalogo.Controllers
 {
     
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {

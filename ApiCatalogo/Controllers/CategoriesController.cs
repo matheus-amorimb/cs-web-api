@@ -22,7 +22,7 @@ namespace ApiCatalogo.Controllers
 //############################ USING GENERIC REPOSITORY ############################
 //##################################################################################
     [EnableCors("originsWithAccessAllowed")]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
